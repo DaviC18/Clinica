@@ -136,10 +136,6 @@ export const conteudo = {
     "facebook": "Clínica Luciana Salgado",
     "aviso": "As informações deste site são educativas e não substituem a consulta com um oftalmologista."
   },
-  "flutuante": {
-    "texto": "Agendar",
-    "ariaLabel": "Agendar consulta pelo WhatsApp"
-  },
   "alt": {
     "imagemOg": "Clínica de Olhos Luciana Salgado, oftalmologia em Volta Redonda/RJ"
   }

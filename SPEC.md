@@ -83,7 +83,7 @@ Cada seção tem um **ID fixo**. O Pesquisador escreve o texto por ID, o Arquite
 | `cta-final` | Fechamento | Chamada para agendar no WhatsApp |
 | `rodape` | Rodapé | Dados legais (CRM, RQE, CNPJ 30.861.073/0001-39), Instagram, endereço |
 
-Elemento fixo em todas as telas: botão flutuante de WhatsApp (`#whatsapp-float`).
+Botão flutuante de WhatsApp removido a pedido do usuário (decisão 27). Os CTAs de WhatsApp ficam em `#hero`, `#servicos`, `#cta-final` e `#faq`.
 
 ## 6. Estrutura de arquivos e posse
 

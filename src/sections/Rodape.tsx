@@ -10,7 +10,7 @@ const linkClasse = 'inline-flex min-h-toque items-center underline underline-off
 
 export function Rodape() {
   return (
-    <footer id="rodape" className="border-t border-cobalto bg-noite px-gutter pt-12 pb-28 text-nevoa md:pb-32">
+    <footer id="rodape" className="border-t border-cobalto bg-noite px-gutter pt-12 pb-12 text-nevoa md:pb-16">
       <div className="mx-auto grid max-w-pagina gap-8 md:grid-cols-2 xl:grid-cols-3">
         <div>
           <p className="font-display text-titulo-3 text-porcelana">{dados.marca}</p>

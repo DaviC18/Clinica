@@ -3,7 +3,7 @@ import { depoisDoLoad } from './ocioso.ts'
 const FECHADO = 'inset(0% calc(50% - 1px))'
 const ABERTO = 'inset(0% calc(0% - 0px))'
 
-/** GSAP fora do JS inicial: nada aqui toca #hero, CTA ou #whatsapp-float. */
+/** GSAP fora do JS inicial: nada aqui toca #hero ou CTA. */
 export function iniciarAnimacoes() {
   let desfazer: (() => void) | undefined
   let cancelado = false

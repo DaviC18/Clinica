@@ -169,15 +169,6 @@ Na Rua 40, nº 20, Shopping 33, Torre 1, Sala 909, Vila Santa Cecília, Volta Re
 
 **Nota ao Desenvolvedor:** a Resolução CFM 2.336/2023, art. 5º, e o Manual do CFM, seção 6, pedem na página inicial o nome da clínica com o registro no CRM e o Diretor Técnico-Médico com CRM e RQE. No rótulo visível, use "Diretor técnico-médico" em vez de "Responsabilidade técnica".
 
-## #whatsapp-float
-
-- **texto visível:** Agendar
-- **aria-label:** Agendar consulta pelo WhatsApp
-- **mensagem pré-preenchida:** Olá! Gostaria de agendar uma consulta.
-- **estado sem número:** [CONFIRMAR: número de WhatsApp]
-
-**Nota ao Desenvolvedor:** `whatsapp.confirmado` é `false`. O candidato (24) 99226-5079 veio de diretórios e não pode virar link `wa.me` ativo nem ser exibido como WhatsApp até a clínica confirmar. A mensagem pré-preenchida não pede dado de saúde.
-
 ## Textos alternativos de imagem
 
 - **logo:** Logo da Dra. Luciana Salgado, com ícone de olho

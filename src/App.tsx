@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { iniciarAnimacoes } from './animations/iniciar.ts'
 import { Metadados } from './components/Metadados.tsx'
-import { WhatsappFlutuante } from './components/WhatsappFlutuante.tsx'
 import { Avaliacoes } from './sections/Avaliacoes.tsx'
 import { CtaFinal } from './sections/CtaFinal.tsx'
 import { Diferenciais } from './sections/Diferenciais.tsx'
@@ -29,7 +28,6 @@ export default function App() {
         <CtaFinal />
       </main>
       <Rodape />
-      <WhatsappFlutuante />
     </>
   )
 }

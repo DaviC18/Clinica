@@ -98,7 +98,7 @@ Componente único `Confirmar`: fundo `ambar`, texto `tinta`, `rounded-suave`, pe
 **WhatsApp sem confirmação (estado atual de `fatos.json`):** um componente único `CtaWhatsApp` lê `whatsapp.confirmado`.
 
 - `true`: `<a href="https://wa.me/...">`.
-- `false`: sem nenhum link `wa.me`. O botão mantém o rótulo e a aparência `fluor`, contém o `Confirmar` visível e aponta para `tel:` do telefone fixo, para que o clique ainda gere contato. É o mesmo componente em `#hero`, `#cta-final` e `#whatsapp-float` (no flutuante, `[CONFIRMAR]` sempre no `aria-label`; etiqueta visível só a partir de `md`, conforme a decisão 11). Trocar o estado precisa ser só mudar `fatos.json`.
+- `false`: sem nenhum link `wa.me`. O botão mantém o rótulo e a aparência `fluor`, contém o `Confirmar` visível e aponta para `tel:` do telefone fixo, para que o clique ainda gere contato. É o mesmo componente em `#hero` e `#cta-final`. Trocar o estado precisa ser só mudar `fatos.json`.
 
 ### `medica`
 
@@ -141,13 +141,13 @@ Componente único `Confirmar`: fundo `ambar`, texto `tinta`, `rounded-suave`, pe
 
 ### `rodape`
 
-- **375:** coluna: marca, endereço, Instagram, dados legais (`text-legal`). `pb-28` para o botão flutuante não cobrir texto.
+- **375:** coluna: marca, endereço, Instagram, dados legais (`text-legal`). `pb-12`; sem botão flutuante, não há mais folga extra no pé.
 - **768:** 2 colunas.
 - **1280:** 3 colunas.
 
-### `#whatsapp-float`
+### Botão flutuante
 
-Fixo no canto inferior direito, 64 px, `bg-fluor`, ícone `tinta`, `shadow-flutuante`, com `aria-label` e `env(safe-area-inset-bottom)`. **Decisão 11:** abaixo de `md` (768 px), o botão não mostra a etiqueta `[CONFIRMAR]`, porque ela cobre o CTA ao lado; o marcador fica no `aria-label`. `#hero` e `#cta-final` seguem com marcador visível. Está no HTML pré-renderizado e aparece no primeiro paint. Só CSS: nenhuma animação de entrada.
+Removido a pedido do usuário (decisão 27). `WhatsappFlutuante`, `#whatsapp-float`, a entrada `flutuante` de `conteudo.md` e o `pb-28` do rodapé não existem mais. Os CTAs de WhatsApp ficam em `#hero`, `#servicos`, `#cta-final` e `#faq`.
 
 ### Contrato de markup (pedido do Validador)
 
@@ -253,7 +253,7 @@ O limiar de 4,5 separa as duas faixas. Continua sendo calibração de um único 
 
 - `gsap` e `ScrollTrigger` entram por `import()` dentro de `useEffect`, depois da hidratação. Ficam fora do JS inicial.
 - **Conteúdo visível por padrão.** Nada de `opacity-0` em CSS ou no HTML. Sem JS, tudo aparece.
-- **Nenhuma animação em `#hero`, em CTA ou em `#whatsapp-float`.** Links são `<a href>` reais: funcionam antes de hidratar. Tweens só atingem `[data-revelar]`, e CTA nunca recebe esse atributo.
+- **Nenhuma animação em `#hero` ou em CTA.** Links são `<a href>` reais: funcionam antes de hidratar. Tweens só atingem `[data-revelar]`, e CTA nunca recebe esse atributo.
 - Toda animação dentro de `gsap.matchMedia('(prefers-reduced-motion: no-preference)')`.
 - **Revelação abaixo da dobra:** `gsap.from` com `y: 16`, `opacity: 0`, até 500 ms, `power3.out`, `clearProps: 'all'`. Dispara uma vez por elemento, com `IntersectionObserver` e `unobserve` ao entrar. Só na `medica`, nos grupos de `servicos` e em `avaliacoes`. Não aplique em todas as seções da mesma forma.
 - **Assinatura:** o gesto recorta uma faixa sem texto dentro de `#diferenciais`, não a seção. `[data-fenda]` é uma `div` `aria-hidden`, `h-[28svh]`, `bg-porcelana`, antes do conteúdo. O `clip-path` vai de `inset(0% calc(50% - 1px))` a `inset(0% calc(0% - 0px))`, com `scrub` do topo da faixa (`top bottom`) até o fim dela (`bottom bottom`), sem `pin`. O texto entra depois que a faixa termina, já aberta, e nunca é recortado.
@@ -318,7 +318,7 @@ Nenhuma base precisou ser trocada, e nenhuma incompatibilidade exigiu contorno a
 
 - `index.html`: entregue; mantém `lang="pt-BR"` e o `<script type="module" src="/src/main.tsx">`.
 - `src/main.tsx`: entregue; mantém o `export const createRoot = ViteReactSSG(...)`.
-- `src/App.tsx`: substituído; monta as seções, `Metadados`, `WhatsappFlutuante` e `iniciarAnimacoes`.
+- `src/App.tsx`: substituído; monta as seções, `Metadados` e `iniciarAnimacoes`.
 - `src/three/Cena.tsx`: cena real; `CenaStub.tsx` não existe mais.
 - `src/styles/global.css`: estendido, com as três primeiras linhas preservadas.
 

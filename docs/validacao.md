@@ -58,7 +58,7 @@ Proibido detectar Lighthouse, PageSpeed, headless ou user agent no código (deci
 | R7.1 | `prefers-reduced-motion`: sem 3D e sem animação longa | Navegador P4 | ok |
 | R7.2 | Sem WebGL ou em celular fraco: imagem estática no lugar da cena, por capacidade real (decisão 8) | Auto `conteudo` (imagem no HTML, sem canvas) + Navegador P5, P8 | ok |
 | R7.3 | Animação não atrasa o clique no WhatsApp | Navegador P6 | ok |
-| R7.4 | Com `whatsapp.confirmado=false` (decisão 4): nenhum `wa.me`; CTA `tel:` do fixo em `#hero`, `#cta-final` e `#whatsapp-float`, com `aria-label` que diz que liga e contém o rótulo visível; `[CONFIRMAR]` visível em `#hero` e `#cta-final`, só no `aria-label` no flutuante em tela estreita (decisão 11); nenhum "WhatsApp" solto no texto. Com `true`: `wa.me` do número dos fatos nos três | Auto `whatsapp` + Navegador P1 | ok |
+| R7.4 | Com `whatsapp.confirmado=false` (decisão 4): nenhum `wa.me`; CTA `tel:` do fixo em `#hero` e `#cta-final`, com `aria-label` que diz que liga e contém o rótulo visível; `[CONFIRMAR]` visível nos dois; nenhum "WhatsApp" solto no texto. Com `true`: `wa.me` do número dos fatos nos dois. Botão flutuante removido (decisão 27) | Auto `whatsapp` + Navegador P1 | ok |
 
 ### SPEC 4: stack
 
@@ -86,7 +86,7 @@ Proibido detectar Lighthouse, PageSpeed, headless ou user agent no código (deci
 | E7 | `#faq`: 5 a 7 perguntas | Auto `conteudo` | ok |
 | E8 | `#cta-final`: chamada para WhatsApp | Auto `secoes`, `whatsapp` | ok |
 | E9 | `#rodape`: CRM, RQE, CNPJ, Instagram, endereço | Auto `cfm`, `conteudo`, `fatos` | ok |
-| E10 | `#whatsapp-float` fixo e visível em todas as telas | Auto `secoes` (presença) + Navegador P1 (posição fixa durante a rolagem) | ok |
+| E10 | `#whatsapp-float` fixo e visível em todas as telas | Removido a pedido do usuário (decisão 27) | n/a |
 | E11 | Um único `h1`, em `#hero`; um `h2` por seção de conteúdo | Auto `conteudo` | ok |
 
 ### SPEC 9: definição de pronto
@@ -95,7 +95,7 @@ Proibido detectar Lighthouse, PageSpeed, headless ou user agent no código (deci
 |---|---|---|---|
 | D1 | Todas as seções com IDs corretos | Auto `secoes` | ok |
 | D2 | `npm run build` sem erros nem warnings de TypeScript | Saída do build | ok |
-| D3 | `npm run check` passa | Auto | ok (ciclo 2): 146 de 146 |
+| D3 | `npm run check` passa | Auto | ok (ciclo 2): 146 de 146; pós-remoção do FAB: 141 de 141 |
 | D4 | Lighthouse dentro das metas | R4.1, R4.2, R4.3 | ok |
 | D5 | `dist/` com o texto das seções | Auto `prerender`, `secoes` | ok |
 | D6 | Reduced motion e sem WebGL: funciona e fica bonito | P4, P5 + Leitura dos screenshots | ok |
@@ -108,7 +108,7 @@ Proibido detectar Lighthouse, PageSpeed, headless ou user agent no código (deci
 
 Todos contra `npm run preview`, com Chrome `--headless=new` (decisão 7). Console sem erros em todos, inclusive de hidratação. Screenshots em /tmp com prefixo `val-`.
 
-- **P1, larguras:** em 375, 768 e 1280 px, tirar screenshot por seção. Avaliar `document.documentElement.scrollWidth <= innerWidth`. Rolar até o fim e confirmar `#whatsapp-float` visível em `position: fixed`, sem cobrir CTA nem texto. Abaixo de 768 px, a etiqueta `[CONFIRMAR]` do flutuante não pode estar renderizada, e o `aria-label` mantém o marcador (decisão 11). Em 375 × 667, CTA do hero acima da dobra.
+- **P1, larguras:** em 375, 768 e 1280 px, tirar screenshot por seção. Avaliar `document.documentElement.scrollWidth <= innerWidth`. Rolar até o fim e confirmar que nada cobre CTA nem texto. Em 375 × 667, CTA do hero acima da dobra. Botão flutuante removido (decisão 27).
 - **P2, ordem de carga:** com rede limitada (Slow 4G), registrar o momento do FCP e o da requisição do chunk com Three.js. O chunk só pode sair depois do FCP. Screenshot antes da cena carregar: texto e CTAs do hero já legíveis.
 - **P3, formulários no cliente:** depois de hidratar e rolar a página inteira, `document.querySelectorAll('form,input,textarea,select').length` deve ser 0.
 - **P4, reduced motion:** contexto com `reducedMotion: 'reduce'`. Sem `<canvas>` no DOM, chunk com Three.js não requisitado, nenhuma seção presa em opacidade 0, screenshot em 375 px.
@@ -119,10 +119,10 @@ Todos contra `npm run preview`, com Chrome `--headless=new` (decisão 7). Consol
 
 ## Lista de `[CONFIRMAR]` para a clínica
 
-19 marcadores no HTML do ciclo 2, saída de `npm run check` (o ciclo 1 também tinha 19):
+18 marcadores no HTML atual, saída de `npm run check` (o ciclo 2 tinha 19, antes da remoção do botão flutuante):
 
 - `#hero`, `#medica`, `#rodape`: RQE da Dra. Luciana
-- `#hero`, `#servicos`, `#cta-final`, `#whatsapp-float`, `#faq`: número de WhatsApp
+- `#hero`, `#servicos`, `#cta-final`, `#faq`: número de WhatsApp
 - `#diferenciais`, `#medica`: fellowship em catarata (HUNING, Porto Alegre)
 - `#diferenciais`, `#faq`: idades atendidas
 - `#medica`: foto da médica
@@ -323,7 +323,7 @@ Nenhuma falha bloqueante. Duas observações, sem reprovação:
 | # | onde | observação | dono |
 |---|---|---|---|
 | O1 | `site/src/components/PorteiroCena.tsx:8` | Limiar de 4,5 voltas/ms com margem de 0,06 na medição de CPU 4x. O mesmo aparelho nominal ora recebe a cena, ora a imagem. As duas rotas passam da meta, mas a calibração segue apoiada em um notebook. Registrar o comportamento; não é falha de critério. | Desenvolvedor / Arquiteto |
-| O2 | `site/src/components/WhatsappFlutuante.tsx` | O botão fixo passa sobre texto durante a rolagem em 24 de 30 amostras em 375 px (é o comportamento normal de um FAB; não cobre CTA nem texto no repouso). Mantido como no ciclo 1. | — |
+| O2 | `site/src/components/WhatsappFlutuante.tsx` | O botão fixo passa sobre texto durante a rolagem em 24 de 30 amostras em 375 px (é o comportamento normal de um FAB; não cobre CTA nem texto no repouso). Mantido como no ciclo 1. **Superado:** componente removido na decisão 27. | — |
 
 Regressões: nenhuma. JS inicial 89,0 KB (igual ao ciclo 1); chunk da cena 245,2 KB (era 241,4); CSS 5,8 KB (igual). Classe de `#whatsapp-float`, hero e gesto sem mudança de contrato.
 
@@ -389,3 +389,15 @@ Outras armadilhas da rodada anterior:
 - GSAP na hidratação custou cerca de 580 ms de execução. Conferir em cenário A.
 - Sonda de CPU varia com a carga da máquina. Fechar outros programas antes de medir e anotar `benchmarkIndex`.
 - `vite-react-ssg` escreve `<title>` e metas antes do charset. Auto `seo`.
+
+## Atualização pós-entrega — remoção do botão flutuante
+
+Data: 2026-11-05. Decisão 27.
+
+- Removidos `src/components/WhatsappFlutuante.tsx`, o uso em `src/App.tsx`, a entrada `flutuante` de `docs/conteudo.md` e de `src/data/gerar-dados.mjs`.
+- `#hero`, `#servicos`, `#cta-final` e `#faq` continuam com CTA de WhatsApp; o estado sem número confirmado não muda (nenhum `wa.me`, `tel:` do fixo, `aria-label` honesto).
+- Rodapé: `pb-28 md:pb-32` virou `pb-12 md:pb-16`.
+- Critério E10 fica `n/a`; R7.4 e P1 foram reescritos sem o flutuante.
+- `npm run build`: 0. `npm run lint`: 0. `npm run check`: **141 de 141, 0 falha, 0 AVISO**. `dist/index.html`: 36,85 KiB.
+- `[CONFIRMAR]`: 18 no relatório do check (22 ocorrências de texto no HTML, por causa da repetição no `aria-label` e na etiqueta do CTA).
+- Esta atualização não refaz Lighthouse; as notas do ciclo 2 continuam como referência e o FAB não pesava no bundle inicial.

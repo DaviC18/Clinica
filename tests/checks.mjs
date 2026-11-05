@@ -350,9 +350,6 @@ function checarSecoes(ctx) {
     const tamanho = nos[0] ? texto(nos[0]).length : 0;
     check('secoes', `#${id} presente uma vez, com texto real`, nos.length === 1 && tamanho >= 30, nos.length === 1 ? `${tamanho} caracteres` : `${nos.length} ocorrências`);
   }
-  const flutuante = ids.get('whatsapp-float') ?? [];
-  const rotulo = flutuante[0] ? textoComAtributos(flutuante[0]) : '';
-  check('secoes', '#whatsapp-float presente uma vez, com texto ou aria-label', flutuante.length === 1 && rotulo.length >= 5, flutuante.length === 1 ? rotulo.slice(0, 60) : `${flutuante.length} ocorrências`);
 }
 
 function checarConteudoSecoes(ctx) {
@@ -925,37 +922,30 @@ function checarAvaliacoes(ctx) {
 }
 
 function checarWhatsapp(ctx) {
-  const { raiz, sec, fatos, ids, corpo } = ctx;
+  const { raiz, sec, fatos, corpo } = ctx;
   const links = hrefs(raiz).filter((h) => /wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(h));
   const numeros = [...new Set(links.map((h) => digitos(h.split('?')[0]) || digitos(/phone=(\d+)/.exec(h)?.[1])))];
   info(`Links de WhatsApp ativos: ${links.length ? links.join(' , ') : 'nenhum'}`);
-  const alvos = [['#hero', sec('hero')], ['#cta-final', sec('cta-final')], ['#whatsapp-float', ids.get('whatsapp-float')?.[0]]];
+  const alvos = [['#hero', sec('hero')], ['#cta-final', sec('cta-final')]];
 
   if (fatos.whatsapp) {
     const ok = numeros.length > 0 && numeros.every((n) => n.endsWith(fatos.whatsapp) || fatos.whatsapp.endsWith(n));
     check('whatsapp', 'links wa.me usam o número confirmado em fatos.json', ok, numeros.join(', '));
     const semLink = alvos.filter(([, no]) => !no || !hrefs(no).some((h) => /wa\.me|whatsapp/i.test(h))).map(([id]) => id);
-    check('whatsapp', 'CTA de WhatsApp ativo em #hero, #cta-final e #whatsapp-float', !semLink.length, semLink.join(', '));
+    check('whatsapp', 'CTA de WhatsApp ativo em #hero e #cta-final', !semLink.length, semLink.join(', '));
     const marcaWhatsapp = new RegExp(FONTE_CONFIRMAR, 'g');
     const comConfirmar = alvos.filter(([, no]) => no && [...textoComAtributos(no).matchAll(marcaWhatsapp)].some((m) => /whatsapp/i.test(m[0]))).map(([id]) => id);
     check('whatsapp', 'número confirmado: sem [CONFIRMAR] de WhatsApp nos CTAs', !comConfirmar.length, comConfirmar.join(', '));
   } else {
     // Decisão 4 do orquestrador: sem confirmação, o CTA liga para o fixo e avisa que falta confirmar.
     check('whatsapp', 'sem número confirmado, nenhum link de WhatsApp ativo', !links.length, links.join(', '));
-    check('whatsapp', '#whatsapp-float existe sem número confirmado', Boolean(ids.get('whatsapp-float')?.[0]));
     for (const [id, no] of alvos) {
       const cta = no ? buscar(no, (n) => n.tag === 'a' && String(n.attrs.href).startsWith('tel:') && temConfirmar(textoComAtributos(n))) : [];
       const certo = cta.filter((n) => digitos(n.attrs.href).endsWith(digitos(fatos.telefone)));
       check('whatsapp', `${id}: CTA tel: do fixo com [CONFIRMAR]`, certo.length > 0, cta.map((n) => n.attrs.href).join(', '));
       const honesto = certo.filter((n) => /lig(ar|a|ue|ação)|telefone/i.test(n.attrs['aria-label'] ?? ''));
       check('whatsapp', `${id}: aria-label do CTA diz que liga`, honesto.length > 0, certo.map((n) => n.attrs['aria-label'] ?? 'sem aria-label').join(' | '));
-      if (id === '#whatsapp-float') {
-        check('whatsapp', '#whatsapp-float: [CONFIRMAR] no aria-label', certo.some((n) => temConfirmar(n.attrs['aria-label'] ?? '')));
-        // Decisão 11: em tela estreita não há etiqueta visível; P1 confere isso no navegador.
-        if (!certo.some((n) => temConfirmar(texto(n)))) info('#whatsapp-float com [CONFIRMAR] só no aria-label (decisão 11).');
-      } else {
-        check('whatsapp', `${id}: [CONFIRMAR] visível no CTA`, certo.some((n) => temConfirmar(texto(n))));
-      }
+      check('whatsapp', `${id}: [CONFIRMAR] visível no CTA`, certo.some((n) => temConfirmar(texto(n))));
     }
     const candidato = fatos.candidatoWhatsapp.slice(2);
     if (candidato) {
@@ -1002,7 +992,7 @@ function checarMapa(ctx) {
 
 function listarConfirmar(ctx) {
   const { raiz, ids, ldBlocos } = ctx;
-  const nomeados = [...IDS_SECAO, 'whatsapp-float'];
+  const nomeados = [...IDS_SECAO];
   const achados = new Set();
   const registrar = (onde, fonte) => {
     for (const m of fonte.matchAll(new RegExp(FONTE_CONFIRMAR, 'g'))) achados.add(`${onde}: ${m[0]}`);

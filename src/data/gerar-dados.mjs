@@ -89,7 +89,6 @@ const horarios = secao('#horarios')
 const faq = secao('#faq')
 const ctaFinal = secao('#cta-final')
 const rodape = secao('#rodape')
-const flutuante = secao('#whatsapp-float')
 const alts = secao('Textos alternativos de imagem')
 
 const linhasDiferenciais = [...diferenciais.mapa]
@@ -179,7 +178,6 @@ const conteudo = {
     facebook: rodape.pegar('Facebook'),
     aviso: rodape.pegar('aviso'),
   },
-  flutuante: { texto: flutuante.pegar('texto visível'), ariaLabel: flutuante.pegar('aria-label') },
   alt: { imagemOg: alts.pegar('imagem Open Graph') },
 }
 
