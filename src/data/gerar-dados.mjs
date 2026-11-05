@@ -5,7 +5,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const AQUI = dirname(fileURLToPath(import.meta.url))
-const DOCS = resolve(AQUI, '../../../docs')
+const DOCS = resolve(AQUI, '../../docs')
 const fatosJson = JSON.parse(readFileSync(join(DOCS, 'fatos.json'), 'utf8'))
 const md = readFileSync(join(DOCS, 'conteudo.md'), 'utf8')
 

@@ -1,0 +1,747 @@
+{
+  "_meta": {
+    "projeto": "Clínica Luciana Salgado",
+    "data_verificacao": "2026-11-05",
+    "pesquisador": "Pesquisador",
+    "legenda_status": {
+      "confirmado": "pode ir ao site sem placeholder",
+      "a_confirmar": "só entra com [CONFIRMAR] visível"
+    },
+    "legenda_verificacao": {
+      "reverificado": "visto hoje em página pública",
+      "parcial": "parte vista hoje",
+      "herdado_spec": "vem da SPEC; a fonte original não pôde ser reaberta, mas nada a contradiz",
+      "nao_encontrado": "procurado e não localizado, ou ausente da fonte citada"
+    },
+    "limites_da_pesquisa": [
+      "WebSearch e WebFetch falharam de novo por erro de modelo. Usei curl, buscador Brave até o limite 429 e Chrome headless.",
+      "Google Maps sem login abre visualização limitada: sem aba de avaliações, contagem e semana completa de horários. Só quinta 07:00–21:00, nota 5,0 e coordenadas apareceram.",
+      "Busca do Google respondeu com CAPTCHA. Não foi resolvido nem contornado.",
+      "Portal do CFM (busca de médicos) usa reCAPTCHA. Não foi contornado; por isso RQE e registro da clínica no CRM seguem sem consulta à base oficial. O endereço testado no site do CREMERJ retornou 404.",
+      "Facebook respondeu 400 e Instagram exige login; só o perfil da clínica expôs título e contadores em rodada anterior.",
+      "DuckDuckGo respondeu 202 sem resultados, Mojeek 403 e Bing trouxe resultados sem relação com a clínica.",
+      "CNES e Receita são cadastros mantidos pelo estabelecimento e podem estar defasados. CPF e e-mail pessoal do CNES não foram copiados para estes documentos."
+    ]
+  },
+  "clinica": {
+    "nome_google": {
+      "valor": "Clínica Luciana Salgado - Oftalmologia Clínica, Cirúrgica, Integrativa e Preventiva",
+      "fonte": "Google Maps",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Nome do perfil. Fora da SPEC: 'Integrativa' não aparece aqui como especialidade; não usar como especialidade no site."
+    },
+    "nome_curto": {
+      "valor": "Clínica de Olhos Luciana Salgado",
+      "fonte": "Instagram",
+      "url": "https://www.instagram.com/clinicadralucianasalgado/",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "outros_nomes": {
+      "valor": [
+        "Clínica Luciana Salgado",
+        "Dra. Luciana Salgado – Oftalmologia Clínica e Cirúrgica"
+      ],
+      "fonte": "Facebook; Ponto de Saúde; Rede Olhos",
+      "url": "https://www.facebook.com/ClinicaLucianaSalgado/",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Variações entre diretórios; marca do site segue a SPEC."
+    },
+    "razao_social": {
+      "valor": "LUCIANA SALGADO SERVICOS MEDICOS OFTALMOLOGICOS LTDA",
+      "fonte": "Receita Federal (dados abertos, via BrasilAPI); Serasa Experian",
+      "url": "https://brasilapi.com.br/api/cnpj/v1/30861073000139",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Situação ATIVA, início em 05/07/2018, nome fantasia CLINICA LUCIANA SALGADO. Serasa mostra o sufixo '- ME' e o CNES ainda mostra EIRELI; vale a forma da Receita."
+    },
+    "cnpj": {
+      "valor": "30.861.073/0001-39",
+      "fonte": "SPEC seção 5; Receita Federal (via BrasilAPI); Serasa Experian",
+      "url": "https://brasilapi.com.br/api/cnpj/v1/30861073000139",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "cnes": {
+      "valor": "9913262",
+      "fonte": "CNES (Cadastro Nacional de Estabelecimentos de Saúde)",
+      "url": "https://cnes.datasus.gov.br/services/estabelecimentos/3306309913262",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Cadastro de saúde, para conferência interna; não vai ao site e não substitui o registro no CRM. Tipo: consultório isolado."
+    },
+    "registro_crm": {
+      "valor": "[CONFIRMAR]",
+      "fonte": "Não encontrado; exigência da Resolução CFM 2.336/2023, art. 5º, I, a",
+      "url": "https://sistemas.cfm.org.br/normas/arquivos/resolucoes/BR/2023/2336_2023.pdf",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "Peça de clínica deve trazer o nome do estabelecimento com o número de registro no CRM. Número não localizado em fonte pública; portal do CFM exige reCAPTCHA."
+    },
+    "especialidade": {
+      "valor": "Oftalmologia",
+      "fonte": "Google Maps (Clínica oftalmológica); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Rede Olhos: 'Oftalmologia Geral e Cirurgia'."
+    },
+    "site_atual": {
+      "valor": "clinicalucianasalgado.com retorna HTTP 404",
+      "fonte": "Acesso direto",
+      "url": "https://clinicalucianasalgado.com",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "endereco": {
+      "valor": {
+        "linha": "Rua 40, nº 20, Shopping 33, Torre 1, Sala 909",
+        "bairro": "Vila Santa Cecília",
+        "cidade": "Volta Redonda",
+        "uf": "RJ",
+        "cep": "27260-200",
+        "plus_code": "FVJW+GF"
+      },
+      "fonte": "Google Maps; Rede Olhos; Ponto de Saúde",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "telefone_fixo": {
+      "valor": "(24) 3512-0300",
+      "fonte": "Google Maps",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "tel": "+552435120300",
+      "nota": "Número de uso atual. Cadastros trazem outros números, que não devem ir ao site: CNES (24) 3342-4236 e Receita (22) 3824-3240."
+    },
+    "celular": {
+      "valor": "(24) 99226-5079",
+      "fonte": "Rede Olhos; Ponto de Saúde",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Número existe nos diretórios como telefone. Google Maps lista só o fixo.",
+      "tel": "+5524992265079"
+    },
+    "horario": {
+      "valor": {
+        "seg_sex": "07h–21h",
+        "sab": "08h–19h",
+        "dom": "08h–15h"
+      },
+      "fonte": "SPEC seção 2 (Perfil do Google); Google Maps",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "parcial",
+      "nota": "DIVERGÊNCIA: o CNES registra segunda a sexta 08:00–18:00, sem sábado e domingo (ficha atualizada em 26/07/2024; dados de origem de 21/09/2019). O Google Maps mostrou hoje (quinta) 07:00–21:00; sábado, domingo e demais dias vêm da SPEC. Visitante sem login recebe a visualização limitada do Google Maps, que não mostra a semana completa. Rede Olhos diz apenas 'Entre em contato'. Mantido no site pela decisão 5 do orquestrador, até a clínica conferir se é o horário de atendimento médico."
+    },
+    "acessibilidade": {
+      "valor": [
+        "Entrada",
+        "Assento",
+        "Banheiro",
+        "Estacionamento"
+      ],
+      "fonte": "Google Maps, aba Sobre",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Todos para pessoas em cadeira de rodas."
+    },
+    "pagamento": {
+      "valor": [
+        "Crédito",
+        "Débito",
+        "NFC"
+      ],
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "A aba Sobre aberta hoje mostrou só acessibilidade, sem pagamento."
+    },
+    "acolhimento": {
+      "valor": "Empresa que acolhe a comunidade LGBTQ+",
+      "fonte": "Google Maps",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "espaco_seguro_trans": {
+      "valor": "Espaço seguro para pessoas trans",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "Não exibido na visualização aberta hoje."
+    },
+    "empreendedoras": {
+      "valor": "Se identifica como uma empresa de empreendedoras",
+      "fonte": "Google Maps",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "convenios": {
+      "valor": null,
+      "fonte": "CNES (só o tipo de atendimento)",
+      "url": "https://cnes.datasus.gov.br/services/estabelecimentos/3306309913262",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "parcial",
+      "nota": "O CNES registra atendimento ambulatorial por plano de saúde privado e particular, e informa que não atende pelo SUS. Nenhuma fonte diz quais planos. Sem lista em Google Maps, Rede Olhos, Ponto de Saúde ou BoaConsulta. Guia da Unimed VR respondeu 403."
+    },
+    "vende_oculos": {
+      "valor": null,
+      "fonte": "SPEC seção 2 (uma avaliação cita armação)",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "Sem confirmação pública."
+    },
+    "todas_as_idades": {
+      "valor": null,
+      "fonte": "Sem fonte explícita",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "Só há indícios indiretos: teste do olhinho e ambliopia em crianças, catarata em adultos."
+    },
+    "aberto_ate_domingo": {
+      "valor": true,
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "herdado_spec",
+      "nota": "Base: horário da SPEC. O CNES não registra atendimento aos sábados e domingos (ver clinica.horario). Visitante sem login recebe a visualização limitada do Google Maps, que não mostra este dado."
+    },
+    "identidade_visual": {
+      "valor": "Logo com ícone de olho e nome 'Dra. Luciana Salgado'",
+      "fonte": "SPEC seção 2 (fotos do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "herdado_spec",
+      "nota": "Arquivo do logo e fotos em alta resolução seguem a pedir à clínica."
+    },
+    "responsavel_tecnico": {
+      "valor": null,
+      "fonte": "Resolução CFM 2.336/2023, art. 5º, I, b (exigência); nome não confirmado",
+      "url": "https://sistemas.cfm.org.br/normas/arquivos/resolucoes/BR/2023/2336_2023.pdf",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "EXIGÊNCIA CONFIRMADA: peça de clínica deve trazer, em local visível, o nome do Diretor Técnico-Médico, a inscrição no CRM e, em estabelecimento especializado, o RQE. O Manual do CFM, seção 6, pede esses dados na página inicial do site. O nome não está em fonte pública. Há indícios de que seja a Dra. Luciana: é a única sócia-administradora na Receita, a única profissional no CNES, e o campo de diretor clínico do CNES coincide com ela. Diretor clínico não é o mesmo cargo; a clínica precisa confirmar.",
+      "candidato": "Dra. Luciana Salgado de Carvalho",
+      "manual_url": "https://publicidademedica.cfm.org.br/manual/baixar-manual"
+    }
+  },
+  "whatsapp": {
+    "valor": "[CONFIRMAR]",
+    "fonte": "Não confirmado",
+    "url": null,
+    "data_verificacao": "2026-11-05",
+    "status": "a_confirmar",
+    "confirmado": false,
+    "verificacao": "nao_encontrado",
+    "nota": "(24) 99226-5079 é candidato vindo de diretórios (Rede Olhos, Ponto de Saúde). Nenhuma fonte diz que é WhatsApp; Rede Olhos usa link tel:. Nova busca não encontrou confirmação.",
+    "candidato": "(24) 99226-5079",
+    "candidato_e164": "5524992265079",
+    "mensagem_padrao": "Olá! Gostaria de agendar uma consulta."
+  },
+  "crm": {
+    "valor": "52908452 RJ",
+    "fonte": "Rede Olhos (perfil verificado); Ponto de Saúde (52-90845-2)",
+    "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+    "data_verificacao": "2026-11-05",
+    "status": "confirmado",
+    "confirmado": true,
+    "verificacao": "reverificado",
+    "nota": "Duas fontes com os mesmos dígitos. BoaConsulta mostra 908452, forma encurtada do mesmo número. SPEC pede conferência final com a clínica."
+  },
+  "rqe": {
+    "valor": "[CONFIRMAR]",
+    "fonte": "Não encontrado",
+    "url": null,
+    "data_verificacao": "2026-11-05",
+    "status": "a_confirmar",
+    "confirmado": false,
+    "verificacao": "nao_encontrado",
+    "nota": "Obrigatório pela Resolução CFM 2.336/2023, art. 4º, II. Ausente em Rede Olhos e Ponto de Saúde; BoaConsulta informa 'RQE não encontrado'. Portal do CFM exige reCAPTCHA, então a base oficial não foi consultada."
+  },
+  "medica": {
+    "nome": {
+      "valor": "Dra. Luciana Salgado de Carvalho",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "graduacao": {
+      "valor": "Medicina, Centro Universitário de Volta Redonda (UniFOA), 2010",
+      "fonte": "Rede Olhos; Lattes (cópia no Escavador, coletada em 21/10/2022)",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Rede Olhos usa o nome por extenso; UniFOA é a sigla usada na SPEC. Lattes: 2005 a 2010."
+    },
+    "titulo_especialista": {
+      "valor": "Título de especialista pelo Conselho Brasileiro de Oftalmologia (CBO)",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "residencia": {
+      "valor": "Residência em Oftalmologia",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Rede Olhos não cita instituição."
+    },
+    "residencia_instituicao": {
+      "valor": "Hospital da Gamboa/RJ",
+      "fonte": "SPEC seção 2",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "DIVERGÊNCIA: ausente nas páginas citadas pela SPEC e no Lattes (cópia no Escavador, coletada em 21/10/2022)."
+    },
+    "especializacao": {
+      "valor": "Especialização em Oftalmologia (PUC-Rio)",
+      "fonte": "SPEC seção 2",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "DIVERGÊNCIA: ausente nas páginas citadas pela SPEC e no Lattes (cópia no Escavador, coletada em 21/10/2022)."
+    },
+    "fellowship_catarata": {
+      "valor": "Fellowship em catarata (HUNING, Porto Alegre)",
+      "fonte": "SPEC seção 2",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "DIVERGÊNCIA: ausente nas páginas citadas pela SPEC e no Lattes (cópia no Escavador, coletada em 21/10/2022)."
+    },
+    "idiomas": {
+      "valor": [
+        "Português",
+        "Inglês"
+      ],
+      "fonte": "Lattes (cópia no Escavador, coletada em 21/10/2022); SPEC seção 2",
+      "url": "https://www.escavador.com/sobre/1890647/luciana-salgado-de-carvalho",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado",
+      "nota": "Lattes declara inglês: compreende, fala, lê e escreve bem. A página atual do Ponto de Saúde não cita idiomas."
+    },
+    "membro_rede_olhos_desde": {
+      "valor": "Setembro de 2020",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    }
+  },
+  "outras_profissionais": [
+    {
+      "valor": "Dra. Erica",
+      "fonte": "SPEC seção 2 (avaliação no Google)",
+      "url": null,
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "O CNES lista só a Dra. Luciana neste estabelecimento. Não usar no site até a clínica confirmar nome completo, CRM e vínculo."
+    }
+  ],
+  "redes": {
+    "instagram_clinica": {
+      "valor": "@clinicadralucianasalgado",
+      "fonte": "Instagram",
+      "url": "https://www.instagram.com/clinicadralucianasalgado/",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    },
+    "instagram_medica": {
+      "valor": "@dra_lucianasalgado",
+      "fonte": "SPEC seção 2 (busca)",
+      "url": "https://www.instagram.com/dra_lucianasalgado/",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "confirmado": false,
+      "verificacao": "nao_encontrado",
+      "nota": "Página exige login e não expôs nome do perfil."
+    },
+    "facebook": {
+      "valor": "ClinicaLucianaSalgado",
+      "fonte": "Facebook",
+      "url": "https://www.facebook.com/ClinicaLucianaSalgado/",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "confirmado": true,
+      "verificacao": "reverificado"
+    }
+  },
+  "avaliacoes": {
+    "nota": "5,0",
+    "total": 606,
+    "lista": [],
+    "url_google": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+    "fonte": "Google Maps (nota); SPEC seção 2 (contagem, nov/2026); RadarUp (nota e contagem anteriores)",
+    "data_verificacao": "2026-11-05",
+    "status": "confirmado",
+    "confirmado": true,
+    "verificacao": "parcial",
+    "nota_pesquisa": "Nota 5,0 vista hoje no Maps. Contagem 606 vem da SPEC; RadarUp mostra 5,0 com 578 avaliações, sem data, valor compatível com um retrato anterior. Nenhum texto literal do Google obtido: o Maps sem login não mostra avaliações e a busca do Google pediu CAPTCHA. Feedbacks da Rede Olhos estão vazios e Médicos Brasil não tem opiniões. lista fica vazia de propósito.",
+    "regras_selecao": "Copiar literal do Google, só primeiro nome; texto não pode ser editado. Descartar avaliação com termo proibido, promessa de resultado, adjetivo de superioridade ou elogio à técnica ou ao resultado de procedimento, e avaliação com dado de saúde que identifique o paciente. Base: Resolução CFM 2.336/2023, art. 8º, §3º e §4º, art. 11, XII, e art. 14, II, g. Depoimento republicado passa a contar como publicação da médica. O Manual do CFM trata como reiterada a repostagem feita mais de duas vezes por semestre; ver pedido ao orquestrador em coord/STATUS.md."
+  },
+  "servicos": [
+    {
+      "grupo": "Consultas",
+      "nome": "Consulta de oftalmologia geral",
+      "explicacao": "Avaliação da saúde dos olhos e da visão.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Consultas",
+      "nome": "Acuidade visual e refração (grau)",
+      "explicacao": "Medem quanto você enxerga e o grau necessário para óculos ou lentes.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Consultas",
+      "nome": "Glaucoma: prevenção, diagnóstico e tratamento",
+      "explicacao": "O glaucoma é uma doença que afeta o nervo óptico, a estrutura que leva as imagens do olho ao cérebro.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Consultas",
+      "nome": "Miopia, astigmatismo, hipermetropia e presbiopia",
+      "explicacao": "Problemas de grau, que dificultam enxergar de longe, de perto ou nos dois casos.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Consultas",
+      "nome": "Olho seco",
+      "explicacao": "Quando a lágrima não lubrifica bem a superfície do olho.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Cirurgia",
+      "nome": "Cirurgia de catarata",
+      "explicacao": "A catarata deixa opaco o cristalino, a lente natural do olho. A cirurgia troca essa lente por uma lente artificial (lente intraocular).",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Cirurgia",
+      "nome": "Cirurgia de pterígio",
+      "explicacao": "O pterígio é um tecido que cresce da parte branca do olho em direção à córnea, a parte transparente da frente do olho.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Cirurgia",
+      "nome": "Retirada de calázio",
+      "explicacao": "O calázio é um caroço na pálpebra causado pelo entupimento de uma glândula.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Mapeamento de retina",
+      "explicacao": "Examina com detalhes a retina, a camada do fundo do olho que capta a luz.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Retinografia colorida digital",
+      "explicacao": "Fotografa o fundo do olho para registrar e acompanhar a retina.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Fundo de olho",
+      "explicacao": "Observa a retina e o nervo óptico.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Biomicroscopia de segmento anterior",
+      "explicacao": "Examina com microscópio a parte da frente do olho, como córnea, íris e cristalino.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Tonometria",
+      "explicacao": "Mede a pressão dentro do olho.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Curva de pressão intraocular",
+      "explicacao": "Mede a pressão do olho em vários momentos para ver como ela varia.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Teste de sobrecarga hídrica",
+      "explicacao": "Mede a pressão do olho antes e depois de beber água, para avaliar como ela reage.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Paquimetria ultrassônica",
+      "explicacao": "Mede a espessura da córnea.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Ceratometria computadorizada",
+      "explicacao": "Mede a curvatura da córnea.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Gonioscopia",
+      "explicacao": "Avalia o ângulo do olho por onde o líquido interno é drenado.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Teste de Schirmer",
+      "explicacao": "Avalia a produção de lágrima, usado na investigação do olho seco.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "Teste de cores (Ishihara)",
+      "explicacao": "Avalia a percepção das cores.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Exames",
+      "nome": "PAM",
+      "explicacao": "[CONFIRMAR: significado da sigla e o que o exame avalia]",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "a_confirmar",
+      "verificacao": "herdado_spec",
+      "nota": "Sigla usada no perfil, sem significado na fonte. Hipótese não verificada: Potential Acuity Meter. Não afirmar até a clínica responder."
+    },
+    {
+      "grupo": "Crianças",
+      "nome": "Teste do olhinho (reflexo vermelho)",
+      "explicacao": "Exame rápido que usa uma luz para observar o reflexo do fundo do olho e identificar sinais de alteração.",
+      "fonte": "SPEC seção 2 (Perfil do Google); Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado"
+    },
+    {
+      "grupo": "Crianças",
+      "nome": "Ambliopia (olho preguiçoso)",
+      "explicacao": "Quando a visão de um olho não se desenvolve como a do outro, em geral na infância.",
+      "fonte": "Rede Olhos",
+      "url": "https://redeolhos.com.br/oftalmologista/luciana-salgado",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "reverificado",
+      "nota": "Perfil público com rodapé 2017-2023; conferir se segue vigente."
+    },
+    {
+      "grupo": "Pequenos procedimentos",
+      "nome": "Retirada de corpo estranho",
+      "explicacao": "Remoção de um cisco ou outra partícula presa no olho.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Pequenos procedimentos",
+      "nome": "Epilação de cílios",
+      "explicacao": "Remoção de cílios que crescem voltados para o olho e causam incômodo.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    },
+    {
+      "grupo": "Pequenos procedimentos",
+      "nome": "Injeção de triancinolona",
+      "explicacao": "Aplicação de um corticoide, um tipo de anti-inflamatório, quando há indicação médica.",
+      "fonte": "SPEC seção 2 (Perfil do Google)",
+      "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+      "data_verificacao": "2026-11-05",
+      "status": "confirmado",
+      "verificacao": "herdado_spec"
+    }
+  ],
+  "mapa": {
+    "consulta": "Clínica Luciana Salgado Oftalmologia Volta Redonda",
+    "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica+Luciana+Salgado+Oftalmologia+Volta+Redonda",
+    "latitude": -22.5187155,
+    "longitude": -44.1038021,
+    "status": "confirmado",
+    "data_verificacao": "2026-11-05",
+    "nota": "URL abriu direto na ficha da clínica. Coordenadas do pino no Google Maps; convertidas, dão o Plus Code FVJW+GF do perfil. Geo no JSON-LD é permitido só com mapa.latitude e mapa.longitude."
+  }
+}

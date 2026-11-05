@@ -8,7 +8,7 @@
     "build": "tsc -b && vite-react-ssg build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check": "node ../tests/checks.mjs",
+    "check": "node tests/checks.mjs",
     "prebuild": "if [ -f src/data/gerar-dados.mjs ]; then node src/data/gerar-dados.mjs; else echo 'prebuild: src/data/gerar-dados.mjs ainda não existe, etapa ignorada'; fi"
   },
   "dependencies": {
