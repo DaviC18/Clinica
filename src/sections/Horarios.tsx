@@ -65,7 +65,7 @@ export function Horarios() {
             <p className="flex items-center gap-2 text-corpo">
               <Phone aria-hidden="true" className="size-5 shrink-0" />
               <span className="sr-only">{rotulos.telefone}: </span>
-              <a href={`tel:${fatos.telefone.tel}`} className="inline-flex min-h-toque items-center font-semibold underline underline-offset-4">
+              <a href={`tel:${fatos.telefone.tel}`} className="inline-flex min-h-toque items-center whitespace-nowrap font-semibold underline underline-offset-4">
                 {telefone}
               </a>
             </p>

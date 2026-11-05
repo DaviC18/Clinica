@@ -27,7 +27,18 @@ html {
 
 body {
   margin: 0;
-  overflow-wrap: anywhere;
+  /* `anywhere` partia palavras no meio; `break-word` só age quando a palavra não cabe. */
+  overflow-wrap: break-word;
+}
+
+/* Evita viúvas em texto corrido; títulos continuam com text-balance. */
+p,
+li,
+dd,
+blockquote,
+figcaption,
+summary {
+  text-wrap: pretty;
 }
 
 /* Header fixo: âncoras param abaixo dele, não atrás. */

@@ -44,7 +44,7 @@ export function Avaliacoes() {
           href={urlGoogle}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-bloco inline-flex min-h-toque items-center gap-2 rounded-full border border-porcelana px-6 py-2.5 text-corpo font-semibold transition-colors duration-rapido ease-foco hover:bg-porcelana hover:text-cobalto focus-visible:outline-fluor"
+          className="mt-bloco inline-flex min-h-toque w-full items-center justify-center gap-2 rounded-full border border-porcelana px-6 py-2.5 text-center text-corpo font-semibold transition-colors duration-rapido ease-foco hover:bg-porcelana hover:text-cobalto focus-visible:outline-fluor sm:w-auto"
         >
           {link}
           <ExternalLink aria-hidden="true" className="size-5 shrink-0" />

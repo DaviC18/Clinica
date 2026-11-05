@@ -45,7 +45,7 @@ Contrastes calculados de novo sobre `tokens.css`: `porcelana/noite` 16,3; `nevoa
 - **Corpo: Atkinson Hyperlegible Next.** Desenhada pelo Braille Institute para leitores com baixa visão, distingue letras e números parecidos. É a escolha certa para este público, não um enfeite.
 - **Títulos: Hepta Slab, peso 300 a 500.** A serifa quadrada lembra as letras das tabelas de acuidade antigas e dá ao site uma voz que os concorrentes não têm. Testada em 375 px sobre `noite`: legível e com caráter.
 
-Corpo nunca abaixo de 18 px no celular; só o texto legal desce a 15 px. Título máximo 84 px. Medida de leitura `max-w-texto` (38 rem). Títulos com `text-balance`.
+Corpo nunca abaixo de 18 px no celular; só o texto legal desce a 15 px. Título máximo 84 px. Medida de leitura `max-w-texto` (38 rem). Títulos com `text-balance`; texto corrido com `text-wrap: pretty` (`p`, `li`, `dd`, `blockquote`, `figcaption`, `summary`), o que evita viúvas. O corpo usa `overflow-wrap: break-word`, nunca `anywhere`: palavra só parte quando não cabe. `SemQuebra` mantém telefone, CEP, CNPJ e palavras compostas inteiros no hífen.
 
 **Números (F11).** O zero da Atkinson é cortado e lembra Ø, inclusive com `tnum`, e o arquivo instalado não tem variante sem corte (recursos: `ccmp frac pnum tnum kern mark mkmk`). Por isso os dígitos 0 a 9 usam a Hepta Slab em todo texto de corpo, sem terceira família e sem download extra: o `@font-face` `Numerais Hepta` em `tokens.css` reaproveita o mesmo arquivo latin dos títulos, com `unicode-range` só para dígitos e `size-adjust: 90%`.
 
@@ -81,9 +81,10 @@ Ritmo de fundo: `hero` noite, `diferenciais` porcelana, `medica` nevoa-clara, `s
 - Componente `Header` montado antes de `<main>`; fixo no topo, fundo `noite`, borda inferior `cobalto`, `z-50`.
 - **375:** marca (ícone de olho do favicon + nome oculto), botão de menu e, dentro do menu, os seis links e o CTA "Agendar".
 - **768:** nome da clínica visível; CTA "Agendar" no header; menu ainda recolhido.
-- **1024 em diante (`lg`):** lista horizontal com Por que aqui, Sobre, Serviços, Avaliações, Horários e Dúvidas; menu deixa de aparecer.
+- **1024 a 1279:** menu recolhido, porque a lista completa ainda não cabe ao lado da marca e do CTA. O botão de menu continua visível.
+- **1280 em diante (`xl`):** lista horizontal com Por que aqui, Sobre, Serviços, Avaliações, Horários e Dúvidas; menu deixa de aparecer.
 - Links fecham o menu mobile ao clicar; `Escape` também fecha. `aria-expanded` e `aria-controls` no botão.
-- O CTA reutiliza `CtaWhatsApp`: sem WhatsApp confirmado, aponta para `tel:` e mostra `[CONFIRMAR]`.
+- O CTA reutiliza `CtaWhatsApp`: sem WhatsApp confirmado, aponta para `tel:` e mostra `[CONFIRMAR]`. No header ele usa `compacto` e `semIcone` para caber em uma linha de 52 px; no menu mobile mantém o ícone.
 - Hero compensa o header com topo de 96 px (375) e 112 px (`md`); seções e rodapé usam `scroll-margin-top` de 4,5 rem (375) e 5,5 rem (`md`).
 
 ### `hero`

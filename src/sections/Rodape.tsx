@@ -15,7 +15,7 @@ export function Rodape() {
         <div>
           <p className="font-display text-titulo-3 text-porcelana">{dados.marca}</p>
           <address className="mt-3 text-legal not-italic">{dados.endereco}</address>
-          <a href={`tel:${fatos.telefone.tel}`} className={`${linkClasse} text-legal`}>
+          <a href={`tel:${fatos.telefone.tel}`} className={`${linkClasse} whitespace-nowrap text-legal`}>
             {dados.telefone}
           </a>
         </div>

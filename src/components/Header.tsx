@@ -41,7 +41,7 @@ export function Header() {
           <span className="hidden font-display text-corpo font-medium md:inline">{nav.marca}</span>
         </a>
 
-        <nav aria-label={nav.rotulo} className="hidden lg:block">
+        <nav aria-label={nav.rotulo} className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {nav.itens.map((item) => (
               <li key={item.href}>
@@ -55,7 +55,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <div className="hidden sm:block">
-            <CtaWhatsApp rotulo={nav.agendar} className="text-legal" />
+            <CtaWhatsApp rotulo={nav.agendar} compacto semIcone className="text-legal" />
           </div>
           <button
             type="button"
@@ -63,14 +63,14 @@ export function Header() {
             aria-controls="menu-mobile"
             aria-label={aberto ? nav.fecharMenu : nav.abrirMenu}
             onClick={() => setAberto((valor) => !valor)}
-            className="inline-flex size-11 items-center justify-center rounded-suave text-porcelana transition-colors duration-rapido ease-foco hover:bg-cobalto focus-visible:outline-fluor lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-suave text-porcelana transition-colors duration-rapido ease-foco hover:bg-cobalto focus-visible:outline-fluor xl:hidden"
           >
             {aberto ? <X aria-hidden="true" className="size-6" /> : <Menu aria-hidden="true" className="size-6" />}
           </button>
         </div>
       </div>
 
-      <div id="menu-mobile" hidden={!aberto} className="border-t border-cobalto bg-noite px-gutter pt-2 pb-6 lg:hidden">
+      <div id="menu-mobile" hidden={!aberto} className="border-t border-cobalto bg-noite px-gutter pt-2 pb-6 xl:hidden">
         <nav aria-label={nav.rotuloMobile}>
           <ul className="flex flex-col">
             {nav.itens.map((item) => (

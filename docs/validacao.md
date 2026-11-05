@@ -401,3 +401,17 @@ Data: 2026-11-05. Decisão 27.
 - `npm run build`: 0. `npm run lint`: 0. `npm run check`: **141 de 141, 0 falha, 0 AVISO**. `dist/index.html`: 36,85 KiB.
 - `[CONFIRMAR]`: 18 no relatório do check antes do header; 19 depois do header (22 ocorrências de texto no HTML, por causa da repetição no `aria-label` e na etiqueta do CTA).
 - Esta atualização não refaz Lighthouse; as notas do ciclo 2 continuam como referência e o FAB não pesava no bundle inicial.
+
+## Atualização pós-entrega — responsividade e quebras de texto
+
+Data: 2026-11-05. Decisão 29.
+
+- `overflow-wrap: anywhere` saiu do `body`; agora é `break-word`. O `anywhere` partia palavras no meio quando a linha apertava, inclusive nos links da navbar em 1024 px.
+- Texto corrido (`p`, `li`, `dd`, `blockquote`, `figcaption`, `summary`) usa `text-wrap: pretty`, que removeu as viúvas medidas em 360, 640, 768 e 1024 px.
+- `SemQuebra` mantém telefone, CEP, CNPJ e palavras compostas inteiros no hífen. Antes, "3512-0300" partia entre "3512-" e "0300" em 360–390 px.
+- Header: a lista horizontal passou de `lg` para `xl`. Entre 1024 e 1279 px ela não cabia ao lado da marca e do CTA; agora o menu aparece nessa faixa. O CTA do header usa `compacto` e `semIcone`, fica em uma linha de 52 px e não colide com logo, nav ou botão.
+- CTA principal: rótulo com `whitespace-nowrap` e padding responsivo. Em 320 px ele ocupa duas linhas (rótulo + marcador), com 79 px, em vez de quebrar o rótulo.
+- Link "Ver todas as avaliações no Google": largura total e centralizado abaixo de `sm`.
+- Auditoria em Chrome headless, 320, 360, 375, 390, 414, 480, 640, 768, 820, 1024, 1280, 1440 e 1920 px: `scrollWidth` igual ou menor que `clientWidth`, zero transbordo de texto, zero viúva, zero palavra partida. O único transbordo é a fenda decorativa do hero, recortada por `overflow-hidden`.
+- Menu verificado em 375, 1024, 1279 e 1280 px: abre, fecha por link e por `Escape`, âncora para 7 px abaixo do header.
+- `npm run build`: 0. `npm run lint`: 0. `npm run check`: **141 de 141, 0 falha**. `[CONFIRMAR]`: 19.
