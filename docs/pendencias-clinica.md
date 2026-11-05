@@ -6,7 +6,7 @@ Regra: nenhum item abaixo entra no site sem confirmação. Enquanto não houver 
 
 Mensagens prontas para enviar: `docs/mensagens-clinica.md` (WhatsApp, e-mail, formulário e lembrete).
 
-## 1. Marcadores visíveis no site — 18 marcadores, 12 assuntos
+## 1. Marcadores visíveis no site — 19 marcadores, 12 assuntos
 
 Contagem de `npm run check`. O check deduplica marcadores idênticos na mesma seção; no HTML há 22 ocorrências de texto porque cada CTA repete o marcador no `aria-label` e na etiqueta visível.
 
@@ -20,7 +20,7 @@ Contagem de `npm run check`. O check deduplica marcadores idênticos na mesma se
 | 6 | Especialização | Confirmar Especialização em Oftalmologia pela PUC-Rio | `#medica`, formação | 1 |
 | 7 | Fellowship em catarata | Confirmar fellowship no HUNING, Porto Alegre | `#medica` e `#diferenciais` | 2 |
 | 8 | Idade de atendimento | Atende crianças? Qual idade mínima e máxima? | `#diferenciais` e `#faq` | 2 |
-| 9 | Número de WhatsApp | Número oficial de WhatsApp da clínica | `#hero`, `#servicos`, `#cta-final` e `#faq` | 3 |
+| 9 | Número de WhatsApp | Número oficial de WhatsApp da clínica | Header, `#hero`, `#servicos`, `#cta-final` e `#faq` | 4 |
 | 10 | Convênios | Lista de convênios aceitos; confirmar particular | `#faq` | 1 |
 | 11 | Depoimentos | Avaliações reais do Perfil do Google e autorização de republicação | `#avaliacoes` | 1 |
 | 12 | PAM | O que significa a sigla e o que o exame avalia | `#servicos` | 1 |

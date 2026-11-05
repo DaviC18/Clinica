@@ -12,8 +12,8 @@ export function Hero() {
     <section id="hero" className="relative isolate flex min-h-svh flex-col overflow-hidden bg-noite text-porcelana">
       <FendaHero />
       <div className="relative z-10 flex flex-1 flex-col px-gutter">
-        <div className="relative mx-auto flex w-full max-w-pagina flex-1 flex-col justify-between gap-6 pt-5 pb-8 md:pt-8 xl:justify-center xl:gap-10 xl:py-12">
-          <p className="max-w-44 text-corpo text-nevoa md:max-w-none xl:absolute xl:top-8">{eyebrow}</p>
+        <div className="relative mx-auto flex w-full max-w-pagina flex-1 flex-col justify-between gap-6 pt-24 pb-8 md:pt-28 xl:justify-center xl:gap-10 xl:pt-28 xl:pb-12">
+          <p className="max-w-44 text-corpo text-nevoa md:max-w-none xl:absolute xl:top-28">{eyebrow}</p>
           <div className="max-w-[34rem] xl:max-w-[41rem]">
             <h1 className="font-display text-hero font-medium text-balance">{titulo}</h1>
             <p className="mt-2 text-corpo text-nevoa md:mt-3 xl:text-corpo-g">{subtitulo}</p>

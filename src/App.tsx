@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { iniciarAnimacoes } from './animations/iniciar.ts'
+import { Header } from './components/Header.tsx'
 import { Metadados } from './components/Metadados.tsx'
 import { Avaliacoes } from './sections/Avaliacoes.tsx'
 import { CtaFinal } from './sections/CtaFinal.tsx'
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <>
       <Metadados />
+      <Header />
       <main>
         <Hero />
         <Diferenciais />

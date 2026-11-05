@@ -38,6 +38,7 @@ Node usado no build local: v24.22.1. O Vite 8 exige Node moderno; use a mesma ve
 ## 3. O que está pronto
 
 - Pré-renderização com `vite-react-ssg`: o HTML de `dist/` já contém o texto das seções.
+- Header fixo com logo, atalhos de seção e CTA "Agendar"; menu no celular.
 - Seções com os IDs da SPEC: `hero`, `diferenciais`, `medica`, `servicos`, `avaliacoes`, `horarios`, `faq`, `cta-final`, `rodape`.
 - Cena 3D do hero atrás de porteiro por capacidade: imagem estática por padrão; Three.js só em idle e só em aparelho aprovado.
 - Animação de abertura e fechamento da fenda com GSAP/ScrollTrigger; sem movimento quando `prefers-reduced-motion` está ativo.
@@ -47,7 +48,7 @@ Node usado no build local: v24.22.1. O Vite 8 exige Node moderno; use a mesma ve
 
 ## 4. Pendências antes de publicar
 
-1. Responder os 18 marcadores visíveis e os itens fora do site em `docs/pendencias-clinica.md`.
+1. Responder os 19 marcadores visíveis e os itens fora do site em `docs/pendencias-clinica.md`.
 2. Aplicar as respostas, rodar `npm run build && npm run check && npm run lint`.
 3. Publicar e conferir o domínio.
 4. Testar em celular real e em Safari/iOS.

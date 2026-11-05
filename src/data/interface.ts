@@ -1,6 +1,22 @@
 // Rótulos de interface escritos à mão: não são fatos da clínica, e por isso não vêm de docs/.
 export const interfaceTextos = {
   ctaLigaAviso: 'por enquanto, este botão liga para',
+  nav: {
+    marca: 'Clínica Luciana Salgado',
+    agendar: 'Agendar',
+    abrirMenu: 'Abrir menu',
+    fecharMenu: 'Fechar menu',
+    rotulo: 'Seções do site',
+    rotuloMobile: 'Seções do site no celular',
+    itens: [
+      { rotulo: 'Por que aqui', href: '#diferenciais' },
+      { rotulo: 'Sobre', href: '#medica' },
+      { rotulo: 'Serviços', href: '#servicos' },
+      { rotulo: 'Avaliações', href: '#avaliacoes' },
+      { rotulo: 'Horários', href: '#horarios' },
+      { rotulo: 'Dúvidas', href: '#faq' },
+    ],
+  },
   medica: { formacao: 'Formação', idiomas: 'Idiomas' },
   servicos: { verTodosExames: 'Ver todos os exames', grupoExames: 'Exames', examesVisiveis: 6 },
   horarios: {

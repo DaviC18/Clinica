@@ -30,6 +30,17 @@ body {
   overflow-wrap: anywhere;
 }
 
+/* Header fixo: âncoras param abaixo dele, não atrás. */
+:where(section[id], footer[id]) {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  :where(section[id], footer[id]) {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
 /* Tabela de acuidade em #diferenciais: cinco linhas de titulo-2 até titulo-3. */
 .linha-acuidade {
   font-size: calc(

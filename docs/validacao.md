@@ -119,10 +119,10 @@ Todos contra `npm run preview`, com Chrome `--headless=new` (decisão 7). Consol
 
 ## Lista de `[CONFIRMAR]` para a clínica
 
-18 marcadores no HTML atual, saída de `npm run check` (o ciclo 2 tinha 19, antes da remoção do botão flutuante):
+19 marcadores no HTML atual, saída de `npm run check` (o ciclo 2 tinha 19, antes da remoção do botão flutuante; o header soma 1):
 
 - `#hero`, `#medica`, `#rodape`: RQE da Dra. Luciana
-- `#hero`, `#servicos`, `#cta-final`, `#faq`: número de WhatsApp
+- Header, `#hero`, `#servicos`, `#cta-final`, `#faq`: número de WhatsApp
 - `#diferenciais`, `#medica`: fellowship em catarata (HUNING, Porto Alegre)
 - `#diferenciais`, `#faq`: idades atendidas
 - `#medica`: foto da médica
@@ -399,5 +399,5 @@ Data: 2026-11-05. Decisão 27.
 - Rodapé: `pb-28 md:pb-32` virou `pb-12 md:pb-16`.
 - Critério E10 fica `n/a`; R7.4 e P1 foram reescritos sem o flutuante.
 - `npm run build`: 0. `npm run lint`: 0. `npm run check`: **141 de 141, 0 falha, 0 AVISO**. `dist/index.html`: 36,85 KiB.
-- `[CONFIRMAR]`: 18 no relatório do check (22 ocorrências de texto no HTML, por causa da repetição no `aria-label` e na etiqueta do CTA).
+- `[CONFIRMAR]`: 18 no relatório do check antes do header; 19 depois do header (22 ocorrências de texto no HTML, por causa da repetição no `aria-label` e na etiqueta do CTA).
 - Esta atualização não refaz Lighthouse; as notas do ciclo 2 continuam como referência e o FAB não pesava no bundle inicial.

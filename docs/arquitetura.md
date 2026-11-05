@@ -76,6 +76,16 @@ Superfícies do navegador já têm tema em `global.css` (`::selection`, foco). E
 
 Ritmo de fundo: `hero` noite, `diferenciais` porcelana, `medica` nevoa-clara, `servicos` porcelana, `avaliacoes` cobalto, `horarios` porcelana, `faq` nevoa-clara, `cta-final` noite, `rodape` noite. Toda seção usa `px-gutter py-secao` e conteúdo em `mx-auto max-w-pagina`.
 
+### `header`
+
+- Componente `Header` montado antes de `<main>`; fixo no topo, fundo `noite`, borda inferior `cobalto`, `z-50`.
+- **375:** marca (ícone de olho do favicon + nome oculto), botão de menu e, dentro do menu, os seis links e o CTA "Agendar".
+- **768:** nome da clínica visível; CTA "Agendar" no header; menu ainda recolhido.
+- **1024 em diante (`lg`):** lista horizontal com Por que aqui, Sobre, Serviços, Avaliações, Horários e Dúvidas; menu deixa de aparecer.
+- Links fecham o menu mobile ao clicar; `Escape` também fecha. `aria-expanded` e `aria-controls` no botão.
+- O CTA reutiliza `CtaWhatsApp`: sem WhatsApp confirmado, aponta para `tel:` e mostra `[CONFIRMAR]`.
+- Hero compensa o header com topo de 96 px (375) e 112 px (`md`); seções e rodapé usam `scroll-margin-top` de 4,5 rem (375) e 5,5 rem (`md`).
+
 ### `hero`
 
 - **375:** `min-h-svh`, coluna, conteúdo alinhado embaixo. Terço superior livre para a fenda. O `eyebrow` fica no topo; o hero não repete a marca. Depois `h1`, especialidade, nota 5,0 (606) com estrela `ambar`, CTA WhatsApp em largura total (`min-h-toque`), link "Ligar" abaixo. Tudo dentro da primeira dobra de 375 × 667; se não couber, reduza o espaço superior, nunca o CTA.
@@ -105,7 +115,7 @@ Componente único `Confirmar`: fundo `ambar`, texto `tinta`, `rounded-suave`, pe
 - **375:** foto retrato 4:5 sangrada nas laterais, depois nome em `text-titulo-2`, linha `Oftalmologista · CRM … · RQE …`, formação em lista ordenada no tempo, idiomas.
 - **768:** foto 5/12 à esquerda, texto 7/12.
 - **1280:** igual, com foto maior e fixa (`sticky`) enquanto o texto rola, se o texto for mais alto que a foto.
-- Sem foto (decisão 18): nenhuma moldura vazia. `#medica` mostra nome e registros, com `[CONFIRMAR]` discreto para a foto. Reserve `width`/`height` só quando a imagem existir. Logo: até chegar o arquivo, a marca é só o nome em Hepta Slab, sem desenhar um olho.
+- Sem foto (decisão 18): nenhuma moldura vazia. `#medica` mostra nome e registros, com `[CONFIRMAR]` discreto para a foto. Reserve `width`/`height` só quando a imagem existir. Logo: o header usa o ícone de olho do favicon + nome (decisão 28); não há arquivo de logo da clínica.
 - Itens de formação e idiomas com `[CONFIRMAR]` ficam na lista como estão em `conteudo.md`.
 
 ### `servicos`
@@ -318,7 +328,7 @@ Nenhuma base precisou ser trocada, e nenhuma incompatibilidade exigiu contorno a
 
 - `index.html`: entregue; mantém `lang="pt-BR"` e o `<script type="module" src="/src/main.tsx">`.
 - `src/main.tsx`: entregue; mantém o `export const createRoot = ViteReactSSG(...)`.
-- `src/App.tsx`: substituído; monta as seções, `Metadados` e `iniciarAnimacoes`.
+- `src/App.tsx`: substituído; monta `Header`, as seções, `Metadados` e `iniciarAnimacoes`.
 - `src/three/Cena.tsx`: cena real; `CenaStub.tsx` não existe mais.
 - `src/styles/global.css`: estendido, com as três primeiras linhas preservadas.
 
