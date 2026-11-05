@@ -1,0 +1,62 @@
+/* Dono: Arquiteto. Fonte única dos valores; tailwind.config.ts só aponta para cá. */
+@import '@fontsource-variable/atkinson-hyperlegible-next/wght.css';
+@import '@fontsource-variable/hepta-slab/wght.css';
+
+/*
+ * O zero da Atkinson é cortado e lembra Ø. Os dígitos vêm da Hepta Slab, sem terceira
+ * família e sem download extra: a URL é o mesmo arquivo latin usado nos títulos.
+ * Motivo em docs/arquitetura.md, seção 1 (F11).
+ */
+@font-face {
+  font-family: 'Numerais Hepta';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 1 900;
+  size-adjust: 90%;
+  src: url('@fontsource-variable/hepta-slab/files/hepta-slab-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0030-0039;
+}
+
+:root {
+  --cor-noite: #0a1050;
+  --cor-cobalto: #16238f;
+  --cor-cobalto-vivo: #2a3dd6;
+  --cor-porcelana: #f6f7fc;
+  --cor-nevoa-clara: #e7eaf8;
+  --cor-nevoa: #c9d1f2;
+  --cor-tinta: #0b1040;
+  --cor-tinta-suave: #3e4678;
+  --cor-fluor: #84eb4f;
+  --cor-fluor-escuro: #1f6b12;
+  --cor-ambar: #ffc56e;
+  --cor-ambar-escuro: #8a5200;
+
+  --fonte-display: 'Hepta Slab Variable', Georgia, serif;
+  --fonte-corpo: 'Numerais Hepta', 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+
+  /* 18 px é o piso do corpo no celular; só o texto legal desce a 15 px. Título máximo: 84 px. */
+  --texto-legal: 0.9375rem;
+  --texto-corpo: 1.125rem;
+  --texto-corpo-g: clamp(1.25rem, 1.18rem + 0.3vw, 1.375rem);
+  --texto-titulo-3: clamp(1.5rem, 1.35rem + 0.7vw, 2rem);
+  --texto-titulo-2: clamp(2rem, 1.6rem + 1.9vw, 3.25rem);
+  --texto-hero: clamp(2.5rem, 1.4rem + 4.9vw, 5.25rem);
+  --entrelinha-corpo: 1.55;
+  --entrelinha-titulo: 1.15;
+  --entrelinha-hero: 1.05;
+
+  --espaco-gutter: clamp(1.25rem, 5vw, 4rem);
+  --espaco-secao: clamp(4rem, 9vw, 8rem);
+  --espaco-bloco: clamp(2rem, 4vw, 3.5rem);
+  --alvo-toque: 3.25rem;
+
+  --largura-pagina: 76rem;
+  --largura-texto: 38rem;
+
+  --raio-suave: 0.5rem;
+  --sombra-flutuante: 0 6px 18px rgb(11 16 64 / 0.35);
+
+  --duracao-rapido: 150ms;
+  --duracao-medio: 300ms;
+  --curva-foco: cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@config '../../tailwind.config.ts';
+
+html {
+  background-color: var(--cor-porcelana);
+  color: var(--cor-tinta);
+  font-family: var(--fonte-corpo);
+  font-size: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+::selection {
+  background-color: var(--cor-fluor);
+  color: var(--cor-tinta);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-cobalto-vivo);
+  outline-offset: 2px;
+}
+
+body {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Tabela de acuidade em #diferenciais: cinco linhas de titulo-2 até titulo-3. */
+.linha-acuidade {
+  font-size: calc(
+    var(--texto-titulo-2) + (var(--texto-titulo-3) - var(--texto-titulo-2)) * var(--passo) / 4
+  );
+  line-height: var(--entrelinha-titulo);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.grupo-detalhes[open] > summary .seta {
+  transform: rotate(180deg);
+}
+
+.grupo-detalhes[open] > summary .seta-mais {
+  transform: rotate(45deg);
+}
+
+/* Imagem e canvas somam luz ao fundo noite: o preto da cena vira transparente. */
+.fenda-luz {
+  mix-blend-mode: screen;
+}
