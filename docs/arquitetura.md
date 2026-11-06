@@ -89,11 +89,11 @@ Ritmo de fundo: `hero` noite, `diferenciais` porcelana, `medica` nevoa-clara, `s
 
 ### `hero`
 
-- **375:** `min-h-svh`, coluna, conteúdo alinhado embaixo. Terço superior livre para a fenda. O `eyebrow` fica no topo; o hero não repete a marca. Depois `h1`, especialidade, nota 5,0 (606) com estrela `ambar`, CTA WhatsApp em largura total (`min-h-toque`), link "Ligar" abaixo. Tudo dentro da primeira dobra de 375 × 667; se não couber, reduza o espaço superior, nunca o CTA.
+- **375:** `min-h-svh`, coluna, conteúdo alinhado embaixo (`justify-end`). Terço superior livre para a fenda. O hero não repete a marca. Ordem: `h1`, especialidade, nota 5,0 (606) com estrela `ambar`, CTA WhatsApp em largura total (`min-h-toque`), `eyebrow` logo abaixo do CTA, link "Ligar" por último. Em 375 × 667 cabe inteiro na primeira dobra; se não couber, reduza o espaço superior, nunca o CTA.
 - **768:** mesma coluna, texto com `max-w-[34rem]`, fenda à direita.
-- **1280:** duas colunas 7/5. Texto à esquerda centrado na vertical; CTAs lado a lado; fenda ocupa a coluna direita de ponta a ponta na altura.
+- **1280:** duas colunas 7/5. Texto à esquerda centrado na vertical (`xl:justify-center`); CTAs em linha, com o telefone ao lado do CTA; `eyebrow` abaixo do CTA, dentro da coluna do botão; fenda ocupa a coluna direita de ponta a ponta na altura.
 - CRM e RQE (ou `[CONFIRMAR]`) ficam junto do nome da médica e da especialidade, também no hero (regra CFM).
-- O campo `eyebrow` de `conteudo.md` ("Oftalmologia em Volta Redonda/RJ") fica no topo do hero, em `text-corpo`, separado do `h1`. Não componha como rótulo pequeno colado acima do título. O hero não repete a marca: ela aparece no rodapé, no `<title>` e nos metadados.
+- O campo `eyebrow` de `conteudo.md` ("Oftalmologia em Volta Redonda/RJ") fica em `text-corpo`, logo abaixo do CTA de WhatsApp e separado do `h1`. Não volte para o topo do hero nem componha como rótulo pequeno colado acima do título. O hero não repete a marca: ela aparece no rodapé, no `<title>` e nos metadados.
 
 ### `diferenciais`
 

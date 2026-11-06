@@ -12,8 +12,7 @@ export function Hero() {
     <section id="hero" className="relative isolate flex min-h-svh flex-col overflow-hidden bg-noite text-porcelana">
       <FendaHero />
       <div className="relative z-10 flex flex-1 flex-col px-gutter">
-        <div className="relative mx-auto flex w-full max-w-pagina flex-1 flex-col justify-between gap-6 pt-24 pb-8 md:pt-28 xl:justify-center xl:gap-10 xl:pt-28 xl:pb-12">
-          <p className="max-w-44 text-corpo text-nevoa md:max-w-none xl:absolute xl:top-28">{eyebrow}</p>
+        <div className="relative mx-auto flex w-full max-w-pagina flex-1 flex-col justify-end pt-24 pb-8 md:pt-28 xl:justify-center xl:pt-28 xl:pb-12">
           <div className="max-w-[34rem] xl:max-w-[41rem]">
             <h1 className="font-display text-hero font-medium text-balance">{titulo}</h1>
             <p className="mt-2 text-corpo text-nevoa md:mt-3 xl:text-corpo-g">{subtitulo}</p>
@@ -24,9 +23,12 @@ export function Hero() {
               <Star aria-hidden="true" className="size-5 shrink-0 fill-ambar text-ambar" />
               {nota}
             </p>
-            <div className="mt-3 flex flex-col gap-1 md:mt-4 xl:mt-6 xl:flex-row xl:items-center xl:gap-6">
-              <CtaWhatsApp rotulo={ctaPrimario} className="w-full md:w-auto md:self-start" />
-              <LinkLigar rotulo={ctaSecundario} className="self-start focus-visible:outline-fluor xl:self-auto" />
+            <div className="mt-3 flex flex-col gap-1 md:mt-4 xl:mt-6 xl:flex-row xl:items-start xl:gap-6">
+              <div className="flex flex-col gap-1.5">
+                <CtaWhatsApp rotulo={ctaPrimario} className="w-full md:w-auto md:self-start" />
+                <p className="text-corpo text-nevoa">{eyebrow}</p>
+              </div>
+              <LinkLigar rotulo={ctaSecundario} className="self-start focus-visible:outline-fluor xl:mt-3" />
             </div>
           </div>
         </div>
