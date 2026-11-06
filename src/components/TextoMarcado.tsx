@@ -1,19 +1,7 @@
-import { Confirmar } from './Confirmar.tsx'
+import { semPendencias } from './semPendencias.ts'
 import { SemQuebra } from './SemQuebra.tsx'
 
-const MARCADOR = /(\[CONFIRMAR(?::[^\]]*)?\])/
-
-/** Mostra um texto de src/data com cada marcador [CONFIRMAR] na etiqueta visível. */
+/** Mostra um texto de src/data sem os marcadores [CONFIRMAR]. */
 export function TextoMarcado({ texto }: { texto: string }) {
-  return (
-    <>
-      {texto.split(MARCADOR).map((parte, i) =>
-        i % 2 === 1 ? (
-          <Confirmar key={i}>{parte}</Confirmar>
-        ) : (
-          <SemQuebra key={i} texto={parte} />
-        ),
-      )}
-    </>
-  )
+  return <SemQuebra texto={semPendencias(texto)} />
 }

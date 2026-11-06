@@ -15,12 +15,28 @@ const LENTE: [number, number] = [1.05, 3.35]
 const RAIO_LENTE = 0.95
 const TOTAL_POEIRA = 44
 
+// Um pulso a cada 7 s. O primeiro chega 2,2 s depois da montagem; antes disso a cena segue
+// igual à imagem estática, e a troca entre as duas não aparece.
+const CICLO_S = 7
+const ANTECEDENCIA_S = 2.5
+const PRIMEIRA_CHEGADA = 14.2
+
+// A onda do leque leva este tempo até a altura do botão. Convite, não insistência: 3 vezes.
+const LUZ_NO_CTA_S = 0.95
+const MAX_LUZ_NO_CTA = 3
+
 const MIN_FPS = 24
 const QUADROS_VIGIADOS = 90
 const QUADROS_IGNORADOS = 10 // Compilação de shader não conta como lentidão.
 
 // Uma cena só na página: os uniforms ficam fora do componente e o laço de quadros os altera.
-const uniforms = { uTempo: { value: 12 }, uLente: { value: LENTE }, uRaio: { value: RAIO_LENTE } }
+const uniforms = {
+  uTempo: { value: 12 },
+  uDesde: { value: -ANTECEDENCIA_S },
+  uAbertura: { value: 0 },
+  uLente: { value: LENTE },
+  uRaio: { value: RAIO_LENTE },
+}
 
 type PropsConteudo = { aoPronta: () => void; aoLento: () => void }
 
@@ -43,12 +59,30 @@ function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
   }, [])
 
   const vigia = useRef({ quadros: 0, tempo: 0, encerrado: false })
+  const luz = useRef({ desdeAnterior: -ANTECEDENCIA_S, vezes: 0 })
 
   useFrame((_, delta) => {
     const t = (uniforms.uTempo.value += delta)
+    const desde = ((t - PRIMEIRA_CHEGADA + ANTECEDENCIA_S) % CICLO_S) - ANTECEDENCIA_S
+    uniforms.uDesde.value = desde
+
+    // innerHeight em vez de medir o hero: nenhuma leitura de layout por quadro.
+    const alvo = Math.min(window.scrollY / window.innerHeight, 1)
+    uniforms.uAbertura.value += (alvo - uniforms.uAbertura.value) * (1 - Math.exp(-delta * 8))
+
+    const l = luz.current
+    if (l.vezes < MAX_LUZ_NO_CTA && l.desdeAnterior < LUZ_NO_CTA_S && desde >= LUZ_NO_CTA_S && alvo < 0.5) {
+      l.vezes++
+      document.querySelector<HTMLElement>('.cta-luz')?.setAttribute('data-ativa', '')
+    }
+    l.desdeAnterior = desde
+
     if (lente.current) {
-      lente.current.rotation.y = 0.62 + Math.sin(t * 0.17) * 0.09
-      lente.current.rotation.x = 0.12 + Math.cos(t * 0.13) * 0.05
+      // Duas frequências: o giro não repete no mesmo compasso e não parece um pêndulo.
+      // O impacto empurra o vidro de leve, e ele volta devagar.
+      const empurrao = desde > 0 ? Math.min(desde / 0.07, 1) * Math.exp(-desde / 0.6) : 0
+      lente.current.rotation.y = 0.58 + Math.sin(t * 0.11) * 0.13 + Math.sin(t * 0.043) * 0.04 + empurrao * 0.035
+      lente.current.rotation.x = 0.10 + Math.cos(t * 0.08) * 0.055
     }
     const v = vigia.current
     if (v.encerrado) return
@@ -64,7 +98,8 @@ function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
 
   return (
     <>
-      <mesh position={[0, 0, -0.5]}>
+      {/* Mesmo plano da lente: com profundidade, a perspectiva desalinha fenda e vidro. */}
+      <mesh>
         <planeGeometry args={[Math.max(larguraMundo, 10) + 2, ALTURA_MUNDO + 2]} />
         <shaderMaterial
           vertexShader={vertFeixe}

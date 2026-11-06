@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T21:40:30.077546-03:00",
+  "title": "Design System: Clínica de Olhos Luciana Salgado",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "flutuante",
+        "value": "0 6px 18px rgb(11 16 64 / 0.35)",
+        "purpose": "Botões de agendar."
+      }
+    ],
+    "motion": [
+      {
+        "name": "curva-foco",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Transições de estado."
+      },
+      {
+        "name": "rapido",
+        "value": "150ms",
+        "purpose": "Hover e foco."
+      },
+      {
+        "name": "medio",
+        "value": "300ms",
+        "purpose": "Transições maiores."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão de agendar",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Agendar por telefone</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;min-height:3.25rem;padding:10px 24px;border-radius:9999px;background:#84eb4f;color:#0b1040;font-weight:600;font-size:1.125rem;text-decoration:none;box-shadow:0 6px 18px rgb(11 16 64 / .35);transition:transform 150ms cubic-bezier(.22,1,.36,1)}.ds-btn-primary:hover{transform:translateY(-2px)}.ds-btn-primary:focus-visible{outline:3px solid #2a3dd6;outline-offset:2px}"
+    },
+    {
+      "name": "Botão contorno",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Ação secundária no escuro.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Ver todas as avaliações</a>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;min-height:3.25rem;padding:10px 24px;border:1px solid #f6f7fc;border-radius:9999px;background:#16238f;color:#f6f7fc;font-weight:600;text-decoration:none;transition:background 150ms,color 150ms}.ds-btn-ghost:hover{background:#f6f7fc;color:#16238f}"
+    },
+    {
+      "name": "Link de navegação",
+      "kind": "nav",
+      "description": "Item do header.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Serviços</a><a href=\"#\">Dúvidas</a></nav>",
+      "css": ".ds-nav{display:flex;gap:8px;background:#0a1050;padding:8px}.ds-nav a{padding:12px;color:#c9d1f2;font-weight:600;font-size:.9375rem;text-decoration:none;transition:color 150ms}.ds-nav a:hover{color:#f6f7fc}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A fenda de luz",
+    "overview": "O momento mais marcante de uma consulta de olhos é a lâmpada de fenda: sala escura, filtro de cobalto, uma fenda fina de luz atravessando uma lente. A página começa nessa sala e acende a luz ao rolar.",
+    "keyCharacteristics": [
+      "Três assinaturas, e só estas: a fenda no hero, a abertura no scroll e a tabela de acuidade.",
+      "Alternância de seções escuras e claras, sem cartões.",
+      "Um único acento luminoso, reservado à ação de agendar."
+    ],
+    "rules": [
+      {
+        "name": "The Único Acento Rule",
+        "body": "Flúor existe para agendar. Nada decorativo usa essa cor.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dezoito Rule",
+        "body": "Corpo nunca fica abaixo de 18 px no celular; só o texto legal desce, até 15 px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Luz Soma Rule",
+        "body": "No escuro, profundidade vem de luz aditiva, nunca de sombra colorida ou vidro.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do manter o WhatsApp visível sem rolar no celular.",
+      "Do usar scrub só na abertura e no fechamento da fenda.",
+      "Do usar ícones de uma só família (lucide)."
+    ],
+    "donts": [
+      "Don't usar cartões iguais de ícone, título e texto como estrutura da página.",
+      "Don't colocar rótulo pequeno acima de título nem numerar seções.",
+      "Don't usar texto em gradiente, vidro decorativo ou sombra colorida sem deslocamento.",
+      "Don't mostrar globo ocular realista.",
+      "Don't usar carrossel de depoimentos."
+    ]
+  }
+}

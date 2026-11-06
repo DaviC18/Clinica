@@ -7,6 +7,7 @@ html {
   color: var(--cor-tinta);
   font-family: var(--fonte-corpo);
   font-size: 100%;
+  scrollbar-color: var(--cor-cobalto) var(--cor-nevoa-clara);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -75,4 +76,44 @@ summary::-webkit-details-marker {
 /* Imagem e canvas somam luz ao fundo noite: o preto da cena vira transparente. */
 .fenda-luz {
   mix-blend-mode: screen;
+}
+
+/* O pulso da cena chega ao botão: um brilho atravessa e um anel se abre. Cena.tsx liga data-ativa. */
+.cta-luz {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.cta-luz::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--cor-porcelana) 65%, transparent) 50%, transparent 65%);
+  transform: translateX(-110%);
+}
+
+.cta-luz[data-ativa] {
+  animation: anel-cta 900ms var(--curva-foco);
+}
+
+.cta-luz[data-ativa]::before {
+  animation: brilho-cta 800ms var(--curva-foco);
+}
+
+@keyframes anel-cta {
+  from {
+    box-shadow: 0 0 0 0 rgb(132 235 79 / 0.55);
+  }
+  to {
+    box-shadow: 0 0 0 14px rgb(132 235 79 / 0);
+  }
+}
+
+@keyframes brilho-cta {
+  to {
+    transform: translateX(110%);
+  }
 }

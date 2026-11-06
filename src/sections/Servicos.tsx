@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import { CtaWhatsApp } from '../components/CtaWhatsApp.tsx'
+import { semPendencias } from '../components/semPendencias.ts'
 import { TextoMarcado } from '../components/TextoMarcado.tsx'
 import { conteudo } from '../data/conteudo.ts'
 import { fatos } from '../data/fatos.ts'
@@ -10,9 +11,12 @@ const { verTodosExames, grupoExames, examesVisiveis } = interfaceTextos.servicos
 
 type Servico = (typeof fatos.servicos)[number]
 
-const grupos = [...new Set<string>(fatos.servicos.map((s) => s.grupo))].map((nome) => ({
+// Serviço sem explicação confirmada fica fora da página.
+const servicos = fatos.servicos.filter((s) => semPendencias(s.explicacao))
+
+const grupos = [...new Set<string>(servicos.map((s) => s.grupo))].map((nome) => ({
   nome,
-  itens: fatos.servicos.filter((s) => s.grupo === nome),
+  itens: servicos.filter((s) => s.grupo === nome),
 }))
 
 function ListaServicos({ itens }: { itens: readonly Servico[] }) {

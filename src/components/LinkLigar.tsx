@@ -1,9 +1,9 @@
-import { Phone } from 'lucide-react'
-import { fatos } from '../data/fatos.ts'
+import { Phone } from "lucide-react";
+import { fatos } from "../data/fatos.ts";
 
-type Props = { rotulo: string; className?: string }
+type Props = { rotulo: string; className?: string };
 
-export function LinkLigar({ rotulo, className = '' }: Props) {
+export function LinkLigar({ rotulo, className = "" }: Props) {
   return (
     <a
       href={`tel:${fatos.telefone.tel}`}
@@ -12,5 +12,5 @@ export function LinkLigar({ rotulo, className = '' }: Props) {
       <Phone aria-hidden="true" className="size-5 shrink-0" />
       {rotulo}
     </a>
-  )
+  );
 }

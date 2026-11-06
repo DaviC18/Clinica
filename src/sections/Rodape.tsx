@@ -1,3 +1,4 @@
+import { semPendencias } from '../components/semPendencias.ts'
 import { TextoMarcado } from '../components/TextoMarcado.tsx'
 import { conteudo } from '../data/conteudo.ts'
 import { fatos } from '../data/fatos.ts'
@@ -33,14 +34,18 @@ export function Rodape() {
           </p>
           <p>{`${rotulos.razaoSocial}: ${dados.razaoSocial}`}</p>
           <p>{`${rotulos.cnpj}: ${dados.cnpj}`}</p>
-          <p>
-            {`${rotulos.registroCrm}: `}
-            <TextoMarcado texto={dados.registroCrm} />
-          </p>
-          <p>
-            {`${rotulos.diretorTecnico}: `}
-            <TextoMarcado texto={dados.diretorTecnico} />
-          </p>
+          {semPendencias(dados.registroCrm) && (
+            <p>
+              {`${rotulos.registroCrm}: `}
+              <TextoMarcado texto={dados.registroCrm} />
+            </p>
+          )}
+          {semPendencias(dados.diretorTecnico) && (
+            <p>
+              {`${rotulos.diretorTecnico}: `}
+              <TextoMarcado texto={dados.diretorTecnico} />
+            </p>
+          )}
         </div>
         <p className="text-legal md:col-span-2 xl:col-span-3">{dados.aviso}</p>
       </div>

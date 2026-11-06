@@ -1,9 +1,8 @@
 import { ExternalLink, Star } from 'lucide-react'
-import { TextoMarcado } from '../components/TextoMarcado.tsx'
 import { conteudo } from '../data/conteudo.ts'
 import { fatos } from '../data/fatos.ts'
 
-const { titulo, resumo, depoimentos, link } = conteudo.avaliacoes
+const { titulo, resumo, link } = conteudo.avaliacoes
 const { lista, urlGoogle } = fatos.avaliacoes
 
 function primeiroNome(autor: string) {
@@ -20,7 +19,7 @@ export function Avaliacoes() {
           <Star aria-hidden="true" className="size-6 shrink-0 fill-ambar text-ambar" />
           {resumo}
         </p>
-        {destaque ? (
+        {destaque && (
           <div className="mt-bloco grid gap-8 md:grid-cols-2 xl:grid-cols-12">
             <figure className="md:col-span-2 xl:col-span-5">
               <blockquote className="font-display text-titulo-3">{destaque.texto}</blockquote>
@@ -35,10 +34,6 @@ export function Avaliacoes() {
               ))}
             </div>
           </div>
-        ) : (
-          <p className="mt-6">
-            <TextoMarcado texto={depoimentos} />
-          </p>
         )}
         <a
           href={urlGoogle}
