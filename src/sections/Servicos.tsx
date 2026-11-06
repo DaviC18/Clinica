@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react'
+import { useId, useState, useSyncExternalStore } from 'react'
 import { CtaWhatsApp } from '../components/CtaWhatsApp.tsx'
 import { semPendencias } from '../components/semPendencias.ts'
 import { TextoMarcado } from '../components/TextoMarcado.tsx'
@@ -14,10 +15,14 @@ type Servico = (typeof fatos.servicos)[number]
 // Serviço sem explicação confirmada fica fora da página.
 const servicos = fatos.servicos.filter((s) => semPendencias(s.explicacao))
 
-const grupos = [...new Set<string>(servicos.map((s) => s.grupo))].map((nome) => ({
-  nome,
-  itens: servicos.filter((s) => s.grupo === nome),
-}))
+// Cirurgia abre a lista: é onde está a catarata, oferta principal da clínica.
+const GRUPO_EM_DESTAQUE = 'Cirurgia'
+
+const grupos = [...new Set<string>(servicos.map((s) => s.grupo))]
+  .sort((a, b) => Number(b === GRUPO_EM_DESTAQUE) - Number(a === GRUPO_EM_DESTAQUE))
+  .map((nome) => ({ nome, itens: servicos.filter((s) => s.grupo === nome) }))
+
+const semAssinatura = () => () => {}
 
 function ListaServicos({ itens }: { itens: readonly Servico[] }) {
   return (
@@ -36,10 +41,30 @@ function ListaServicos({ itens }: { itens: readonly Servico[] }) {
 
 function Grupo({ nome, itens }: { nome: string; itens: readonly Servico[] }) {
   const recolher = nome === grupoExames && itens.length > examesVisiveis
+  const painel = useId()
+  // Sem JS e no HTML pré-renderizado tudo fica aberto. Recolher só vale no celular (CSS).
+  const hidratado = useSyncExternalStore(semAssinatura, () => true, () => false)
+  const [aberto, setAberto] = useState(nome === GRUPO_EM_DESTAQUE)
+  const fechado = hidratado && !aberto
   return (
-    <article data-revelar className="border-t border-nevoa py-8 xl:grid xl:grid-cols-12 xl:gap-10">
-      <h3 className="font-display text-titulo-3 xl:sticky xl:top-8 xl:col-span-3 xl:self-start">{nome}</h3>
-      <div className="mt-4 xl:col-span-9 xl:mt-0">
+    <article data-revelar className="border-t border-nevoa py-4 xl:grid xl:grid-cols-12 xl:gap-10 xl:py-8">
+      <h3 className="font-display text-titulo-3 xl:hidden">
+        <button
+          type="button"
+          aria-expanded={!fechado}
+          aria-controls={painel}
+          onClick={() => setAberto(fechado)}
+          className="flex min-h-toque w-full items-center justify-between gap-4 text-left"
+        >
+          <span className="min-w-0">{nome}</span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`size-6 shrink-0 transition-transform duration-rapido ease-foco ${fechado ? '' : 'rotate-180'}`}
+          />
+        </button>
+      </h3>
+      <h3 className="hidden font-display text-titulo-3 xl:sticky xl:top-28 xl:col-span-3 xl:block xl:self-start">{nome}</h3>
+      <div id={painel} className={`mt-4 xl:col-span-9 xl:mt-0 xl:block ${fechado ? 'hidden' : ''}`}>
         <ListaServicos itens={recolher ? itens.slice(0, examesVisiveis) : itens} />
         {recolher && (
           <details className="grupo-detalhes mt-5">

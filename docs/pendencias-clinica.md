@@ -2,30 +2,32 @@
 
 Dono: Pesquisador / Orquestrador. Uso: enviar à clínica e usar as respostas para fechar o site.
 
-Regra: nenhum item abaixo entra no site sem confirmação. Enquanto não houver resposta, o texto continua com `[CONFIRMAR]` visível.
+Regra: nenhum item abaixo entra no site sem confirmação. Por decisão do dono, os marcadores `[CONFIRMAR]` seguem em `src/data/` como lista de pendências, mas não aparecem na página (`src/components/semPendencias.ts`): o trecho sem confirmação é omitido.
 
 Mensagens prontas para enviar: `docs/mensagens-clinica.md` (WhatsApp, e-mail, formulário e lembrete).
 
-## 1. Marcadores visíveis no site — 19 marcadores, 12 assuntos
+## 1. Dados pendentes — 12 assuntos
 
-Contagem de `npm run check`. O check deduplica marcadores idênticos na mesma seção; no HTML há 22 ocorrências de texto porque cada CTA repete o marcador no `aria-label` e na etiqueta visível.
+**Bloqueiam a publicação:** itens 1, 2 e 3 (Resolução CFM 2.336/2023). `npm run check` mantém 7 falhas de propósito até esses dados chegarem.
 
-| # | Assunto | O que confirmar | Onde aparece | Ocorrências |
+O efeito de cada item na página está na coluna "Hoje na página".
+
+| # | Assunto | O que confirmar | Onde entra | Hoje na página |
 |---|---|---|---|---|
-| 1 | RQE da Dra. Luciana | Número do RQE em Oftalmologia | `#hero`, `#medica`, `#rodape` | 3 |
-| 2 | Registro da clínica no CRM | Número de registro do estabelecimento no CRM | `#rodape` | 1 |
-| 3 | Diretor técnico-médico | Nome completo, CRM e RQE do responsável técnico | `#rodape` | 1 |
-| 4 | Foto da médica | Foto em alta resolução, com autorização de uso | `#medica` | 1 |
-| 5 | Residência médica | Confirmar se foi no Hospital da Gamboa/RJ | `#medica`, formação | 1 |
-| 6 | Especialização | Confirmar Especialização em Oftalmologia pela PUC-Rio | `#medica`, formação | 1 |
-| 7 | Fellowship em catarata | Confirmar fellowship no HUNING, Porto Alegre | `#medica` e `#diferenciais` | 2 |
-| 8 | Idade de atendimento | Atende crianças? Qual idade mínima e máxima? | `#diferenciais` e `#faq` | 2 |
-| 9 | Número de WhatsApp | Número oficial de WhatsApp da clínica | Header, `#hero`, `#servicos`, `#cta-final` e `#faq` | 4 |
-| 10 | Convênios | Lista de convênios aceitos; confirmar particular | `#faq` | 1 |
-| 11 | Depoimentos | Avaliações reais do Perfil do Google e autorização de republicação | `#avaliacoes` | 1 |
-| 12 | PAM | O que significa a sigla e o que o exame avalia | `#servicos` | 1 |
+| 1 | RQE da Dra. Luciana | Número do RQE em Oftalmologia | `#hero`, `#medica`, `#rodape` | "RQE" omitido |
+| 2 | Registro da clínica no CRM | Número de registro do estabelecimento no CRM | `#rodape` | Linha omitida |
+| 3 | Diretor técnico-médico | Nome completo, CRM e RQE do responsável técnico | `#rodape` | Linha omitida |
+| 4 | Foto da médica | Autorização de uso e versão em alta resolução | `#medica` | Recorte da foto enviada pelo dono em uso; original em `docs/fotos/` |
+| 5 | Residência médica | Confirmar se foi no Hospital da Gamboa/RJ | `#medica`, formação | "Residência em Oftalmologia" sem instituição |
+| 6 | Especialização | Confirmar Especialização em Oftalmologia pela PUC-Rio | `#medica`, formação | Omitida |
+| 7 | Fellowship em catarata | Confirmar fellowship no HUNING, Porto Alegre | `#medica` e `#diferenciais` | Omitido |
+| 8 | Idade de atendimento | Atende crianças? Qual idade mínima e máxima? | `#diferenciais` e `#faq` | Idades omitidas |
+| 9 | Número de WhatsApp | Número oficial de WhatsApp da clínica | Header, `#hero`, `#servicos`, `#faq`, `#cta-final` | CTAs ligam para o fixo e dizem "Ligar" |
+| 10 | Convênios | Lista de convênios aceitos; confirmar particular | `#faq` | Pergunta fora do FAQ |
+| 11 | Depoimentos | Avaliações reais do Perfil do Google e autorização de republicação | `#avaliacoes` | Só a nota, com título "Nota dos pacientes no Google" |
+| 12 | PAM | O que significa a sigla e o que o exame avalia | `#servicos` | Serviço fora da lista |
 
-Também pendente de conferência, sem marcador próprio:
+Aparecem no site sem conferência final (os três primeiros) ou seguem em aberto:
 
 - Horário de funcionamento: a SPEC diz seg–sex 7h–21h, sábado 8h–19h e domingo 8h–15h; o CNES informa seg–sex 8h–18h. Confirmar a versão correta antes de publicar.
 - Total de avaliações: o site usa 606, herdado da SPEC; o RadarUp mostrava 578 em retrato anterior. Conferir no Perfil do Google.
@@ -66,20 +68,19 @@ Arquivos-fonte:
 2. Manter `mensagem_padrao`.
 3. Rodar `npm run build`.
 4. O gerador recusa `confirmado=true` com `valor` sem número. O candidato `(24) 99226-5079` nunca é publicado por conta própria.
-5. Conferir que os três CTAs e o link do FAQ passaram a usar `wa.me` e que o selo `[CONFIRMAR]` sumiu.
+5. Conferir que os CTAs passaram a usar `wa.me` e que o link "Ligar" voltou ao lado do botão.
 
 ### Foto da médica
 
 1. Receber arquivo em alta resolução e autorização de uso.
-2. Salvar em `public/img/` (o nome e o recorte serão definidos com o Desenvolvedor).
-3. Trocar o campo `foto` em `docs/conteudo.md`.
-4. A seção `#medica` hoje não tem moldura de imagem: é preciso uma alteração pequena em `src/sections/Medica.tsx` para renderizar a foto. Pedir ao Desenvolvedor.
+2. Gerar `public/img/dra-luciana-480.webp` e `.avif` em 4:5, com o rosto ao centro. `src/sections/Medica.tsx` já renderiza a foto em oval.
+3. Remover o marcador do campo `foto` em `docs/conteudo.md`.
 
 ### Depoimentos
 
 1. Copiar o texto literal do Google, só com o primeiro nome do autor.
 2. Aplicar as regras de seleção registradas em `docs/fatos.json` (`avaliacoes.regras_selecao`): sem promessa de resultado, sem dado de saúde identificável, sem elogio à técnica.
-3. Preencher `avaliacoes.lista` em `docs/fatos.json` e remover o marcador de `docs/conteudo.md`.
+3. Preencher `avaliacoes.lista` em `docs/fatos.json` e remover o marcador de `docs/conteudo.md`. O título "O que dizem os pacientes" e as citações voltam sozinhos.
 4. Guardar a autorização de republicação.
 
 ### PAM
@@ -89,8 +90,9 @@ Arquivos-fonte:
 
 ## 3. Antes de publicar
 
-- Nenhum `[CONFIRMAR]` visível deve restar no HTML de `dist/`.
-- `npm run check` precisa continuar em 141 de 141.
-- O rodapé precisa ter CRM e RQE, ou marcador explícito se a clínica ainda não respondeu.
+- Nenhum `[CONFIRMAR]` deve restar no HTML de `dist/`.
+- `npm run check` precisa fechar em 141 de 141.
+- O rodapé precisa ter CRM, RQE e diretor técnico-médico: sem isso, não publicar.
+- Os marcadores ainda estão no JS publicado (`dist/assets/`): não publicar antes de resolvê-los.
 - O domínio precisa responder 200; hoje `clinicalucianasalgado.com` responde 404.
 - Testar em celular real e Safari/iOS.

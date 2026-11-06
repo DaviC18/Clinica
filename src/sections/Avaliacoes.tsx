@@ -1,9 +1,12 @@
 import { ExternalLink, Star } from 'lucide-react'
 import { conteudo } from '../data/conteudo.ts'
 import { fatos } from '../data/fatos.ts'
+import { interfaceTextos } from '../data/interface.ts'
 
 const { titulo, resumo, link } = conteudo.avaliacoes
 const { lista, urlGoogle } = fatos.avaliacoes
+const [nota, ...restoDoResumo] = resumo.split(' ')
+const ESTRELAS = [1, 2, 3, 4, 5]
 
 function primeiroNome(autor: string) {
   return autor.trim().split(/\s+/)[0]
@@ -14,10 +17,20 @@ export function Avaliacoes() {
   return (
     <section id="avaliacoes" className="bg-cobalto px-gutter py-secao text-porcelana">
       <div data-revelar className="mx-auto max-w-pagina">
-        <h2 className="font-display text-titulo-2 font-medium text-balance">{titulo}</h2>
-        <p className="mt-4 flex items-center gap-2 text-corpo-g font-semibold">
-          <Star aria-hidden="true" className="size-6 shrink-0 fill-ambar text-ambar" />
-          {resumo}
+        {/* Sem depoimentos reais, o título não promete falas: a prova é a nota. */}
+        <h2 className="font-display text-titulo-2 font-medium text-balance">
+          {destaque ? titulo : interfaceTextos.avaliacoesSemFalas}
+        </h2>
+        <p className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <span className="font-display text-nota font-medium">{nota}</span>
+          <span className="flex flex-col gap-1 text-corpo-g font-semibold">
+            <span aria-hidden="true" className="flex gap-1">
+              {ESTRELAS.map((n) => (
+                <Star key={n} className="size-6 fill-ambar text-ambar" />
+              ))}
+            </span>
+            {restoDoResumo.join(' ')}
+          </span>
         </p>
         {destaque && (
           <div className="mt-bloco grid gap-8 md:grid-cols-2 xl:grid-cols-12">

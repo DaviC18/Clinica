@@ -26,7 +26,7 @@ export function Horarios() {
       <div className="mx-auto max-w-pagina">
         <h2 className="font-display text-titulo-2 font-medium text-balance">{titulo}</h2>
         <div className="mt-bloco grid gap-10 md:grid-cols-2 xl:grid-cols-12">
-          <div className="xl:col-span-5">
+          <div className="min-w-0 xl:col-span-5">
             <table className="w-full border-collapse text-left">
               <caption className="text-left text-corpo text-tinta-suave">{rotulos.legendaTabela}</caption>
               <thead className="sr-only">
@@ -62,7 +62,7 @@ export function Horarios() {
               {mapaLink}
               <ExternalLink aria-hidden="true" className="size-5 shrink-0" />
             </a>
-            <p className="flex items-center gap-2 text-corpo">
+            <p className="flex flex-wrap items-center gap-2 text-corpo">
               <Phone aria-hidden="true" className="size-5 shrink-0" />
               <span className="sr-only">{rotulos.telefone}: </span>
               <a href={`tel:${fatos.telefone.tel}`} className="inline-flex min-h-toque items-center whitespace-nowrap font-semibold underline underline-offset-4">
@@ -70,12 +70,12 @@ export function Horarios() {
               </a>
             </p>
           </div>
-          <div className="flex flex-col gap-6 xl:col-span-7">
+          <div className="flex min-w-0 flex-col gap-6 xl:col-span-7">
             <div className="min-h-80 flex-1">
               <Mapa />
             </div>
             <div>
-              <h3 className="flex items-center gap-2 font-display text-titulo-3">
+              <h3 className="flex flex-wrap items-center gap-2 font-display text-titulo-3">
                 <Accessibility aria-hidden="true" className="size-6 shrink-0" />
                 {rotulos.acessibilidade}
               </h3>

@@ -7,12 +7,12 @@ import { interfaceTextos } from '../data/interface.ts'
 const dados = conteudo.rodape
 const rotulos = interfaceTextos.rodape
 
-const linkClasse = 'inline-flex min-h-toque items-center underline underline-offset-4 focus-visible:outline-fluor'
+const linkClasse = 'inline-flex min-h-toque max-w-full items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-fluor'
 
 export function Rodape() {
   return (
     <footer id="rodape" className="border-t border-cobalto bg-noite px-gutter pt-12 pb-12 text-nevoa md:pb-16">
-      <div className="mx-auto grid max-w-pagina gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mx-auto grid max-w-pagina grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
         <div>
           <p className="font-display text-titulo-3 text-porcelana">{dados.marca}</p>
           <address className="mt-3 text-legal not-italic">{dados.endereco}</address>

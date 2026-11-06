@@ -11,6 +11,7 @@ colors:
   tinta: "#0b1040"
   tinta-suave: "#3e4678"
   fluor: "#84eb4f"
+  ambar: "#ffc56e"
 typography:
   display:
     fontFamily: "Hepta Slab Variable, Georgia, serif"
@@ -86,6 +87,7 @@ Azul-noite de consultório escuro, porcelana de sala acesa e um verde fluorescen
 
 ### Secondary
 - **Flúor**: fundo dos botões de agendar e seleção de texto.
+- **Âmbar**: estrelas da nota.
 
 ### Neutral
 - **Porcelana**: fundo claro principal.
@@ -102,7 +104,7 @@ Azul-noite de consultório escuro, porcelana de sala acesa e um verde fluorescen
 **Display Font:** Hepta Slab (com Georgia)
 **Body Font:** Atkinson Hyperlegible Next (com system-ui)
 
-**Character:** A serifa quadrada lembra as tabelas de acuidade antigas; a Atkinson foi desenhada pelo Braille Institute para baixa visão. Os dígitos vêm da Hepta Slab, porque o zero cortado da Atkinson lembra Ø.
+**Character:** A serifa quadrada lembra as tabelas de acuidade antigas; a Atkinson foi desenhada pelo Braille Institute para baixa visão. Os dígitos vêm da Hepta Slab (`Numerais Hepta`), porque o zero cortado da Atkinson lembra Ø.
 
 ### Hierarchy
 - **Display**: nome da clínica no hero.
@@ -116,11 +118,11 @@ Azul-noite de consultório escuro, porcelana de sala acesa e um verde fluorescen
 
 ## Layout
 
-Fluxo vertical em seções de largura total, com conteúdo limitado a 76rem por margens fluidas. Grade de 12 colunas a partir de `xl`, empilhada em mobile first. Em `diferenciais`, o mobile é centralizado como tabela de acuidade e o desktop vira linhas de tabela.
+Fluxo vertical em seções de largura total, com conteúdo limitado a 76rem por margens fluidas. Grade de 12 colunas a partir de `xl` (1024 px, não o padrão de 1280), empilhada em mobile first. A altura também decide: `baixa` para celular deitado e `curta` para celular pequeno em pé, mantendo o CTA do hero acima da dobra. Em `diferenciais`, o mobile é centralizado como tabela de acuidade e o desktop vira linhas de tabela.
 
 ## Elevation & Depth
 
-Plano por camadas de cor. A única sombra é a dos botões flutuantes; a profundidade vem da luz somada ao fundo escuro (`mix-blend-mode: screen`).
+Plano por camadas de cor. A única sombra é a dos botões de agendar; a profundidade vem da luz somada ao fundo escuro (`mix-blend-mode: screen`).
 
 ### Named Rules
 **The Luz Soma Rule.** No escuro, profundidade vem de luz aditiva, nunca de sombra colorida ou vidro.
@@ -149,7 +151,7 @@ Os diferenciais em tamanho decrescente, linha a linha, em Hepta Slab.
 ## Do's and Don'ts
 
 ### Do:
-- **Do** manter o WhatsApp visível sem rolar no celular.
+- **Do** manter o contato visível no header em toda largura.
 - **Do** usar scrub só na abertura e no fechamento da fenda.
 - **Do** usar ícones de uma só família (lucide).
 

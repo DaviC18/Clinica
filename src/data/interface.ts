@@ -1,9 +1,11 @@
 // Rótulos de interface escritos à mão: não são fatos da clínica, e por isso não vêm de docs/.
 export const interfaceTextos = {
-  ctaLigaAviso: 'por enquanto, este botão liga para',
+  ligar: 'Ligar',
+  pularConteudo: 'Pular para o conteúdo',
+  avaliacoesSemFalas: 'Nota dos pacientes no Google',
+  fotoMedica: 'Foto da',
   nav: {
     marca: 'Clínica Luciana Salgado',
-    agendar: 'Agendar',
     abrirMenu: 'Abrir menu',
     fecharMenu: 'Fechar menu',
     rotulo: 'Seções do site',

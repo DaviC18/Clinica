@@ -37,7 +37,7 @@ O paciente chega por anúncio, decide no celular e agenda por mensagem ou telefo
 - Linguagem de paciente: termo técnico sempre com explicação curta.
 - Desempenho: Lighthouse mobile ≥ 85 em Performance e ≥ 90 nas demais; bundle inicial ≤ 200 KB gzip; Three.js em chunk separado, depois do primeiro paint.
 - Animação nunca atrasa o clique de agendar. Sem WebGL, em aparelho fraco ou com `prefers-reduced-motion`, a cena 3D vira imagem estática.
-- Pendente com a clínica: número de WhatsApp, RQE, registro da clínica no CRM, diretor técnico-médico, convênios, idades atendidas, foto da médica, avaliações reais, parte da formação. Sem número de WhatsApp, os CTAs ligam para o fixo e dizem "por telefone".
+- Pendente com a clínica: número de WhatsApp, RQE, registro da clínica no CRM, diretor técnico-médico, convênios, idades atendidas, avaliações reais, parte da formação. Sem número de WhatsApp, há um só CTA: ligar para o fixo, com o número no botão.
 
 ## Brand Commitments
 
@@ -49,7 +49,8 @@ O paciente chega por anúncio, decide no celular e agenda por mensagem ou telefo
 
 - Nota e total de avaliações do Perfil do Google.
 - Fatos em `docs/fatos.json` e textos em `docs/conteudo.md`.
-- Ausentes, e proibido fabricar: depoimentos reais, foto da médica, logo em arquivo, convênios.
+- Foto da médica fornecida pelo dono: recorte em `public/img/dra-luciana-480.*`, original em `docs/fotos/`. Uso depende de autorização dela.
+- Ausentes, e proibido fabricar: depoimentos reais, logo em arquivo, convênios.
 
 ## Product Principles
 

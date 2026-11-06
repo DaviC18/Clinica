@@ -8,12 +8,11 @@ export function destinoWhatsapp(rotulo: string) {
   if (whatsapp.confirmado && whatsapp.href) {
     return { href: whatsapp.href, rotulo, ariaLabel: undefined, externo: true }
   }
-  // O botão liga: prometer WhatsApp no rótulo levaria o paciente ao lugar errado.
-  const rotuloLigacao = rotulo.replace('pelo WhatsApp', 'por telefone')
+  // O botão liga: o rótulo diz isso, e o número fica à vista de quem não usa discador.
   return {
     href: `tel:${telefone.tel}`,
-    rotulo: rotuloLigacao,
-    ariaLabel: `${rotuloLigacao}: ${interfaceTextos.ctaLigaAviso} ${telefone.exibicao}`,
+    rotulo: `${interfaceTextos.ligar}: ${telefone.exibicao}`,
+    ariaLabel: `${interfaceTextos.ligar}: ${telefone.exibicao}`,
     externo: false,
   }
 }

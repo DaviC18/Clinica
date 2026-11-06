@@ -2,6 +2,10 @@
 @import './tokens.css';
 @config '../../tailwind.config.ts';
 
+/* Altura decide o layout aqui, não a largura: celular deitado e celular pequeno em pé. */
+@custom-variant baixa (@media (orientation: landscape) and (max-height: 31.25rem));
+@custom-variant curta (@media (orientation: portrait) and (max-height: 40rem));
+
 html {
   background-color: var(--cor-porcelana);
   color: var(--cor-tinta);
@@ -24,6 +28,18 @@ html {
 :focus-visible {
   outline: 3px solid var(--cor-cobalto-vivo);
   outline-offset: 2px;
+}
+
+/* Cobalto vivo some sobre noite e cobalto (2,3:1 e 1,6:1). */
+.bg-noite :focus-visible,
+.bg-cobalto :focus-visible {
+  outline-color: var(--cor-fluor);
+}
+
+h1,
+h2,
+h3 {
+  hyphens: auto;
 }
 
 body {
@@ -76,6 +92,11 @@ summary::-webkit-details-marker {
 /* Imagem e canvas somam luz ao fundo noite: o preto da cena vira transparente. */
 .fenda-luz {
   mix-blend-mode: screen;
+}
+
+/* Sem isto a imagem estática termina em linha reta na borda da caixa. */
+.fenda-imagem {
+  mask-image: linear-gradient(to right, transparent, black 20%, black 90%, transparent);
 }
 
 /* O pulso da cena chega ao botão: um brilho atravessa e um anel se abre. Cena.tsx liga data-ativa. */

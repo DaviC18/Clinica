@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AdditiveBlending, BufferAttribute, BufferGeometry, FrontSide, type Mesh } from 'three'
+import { AdditiveBlending, BufferAttribute, BufferGeometry, FrontSide, type Mesh, Vector2 } from 'three'
 import {
   fragFeixe,
   fragLente,
@@ -11,8 +11,13 @@ import {
 } from './shaders.ts'
 
 const ALTURA_MUNDO = 10
-const LENTE: [number, number] = [1.05, 3.35]
 const RAIO_LENTE = 0.95
+const TOPO_ATE_LENTE = 1.65
+const ESCALA_LARGA = 1.25
+const ESCALA_DEITADO = 1.3
+const ESCALA_MINIMA = 0.75
+const FOLGA_TEXTO_PX = 8
+const BORDA_DO_CONTEUDO_PX = 520 // Da metade da tela até a lente, no máximo: fica ao lado do texto.
 const TOTAL_POEIRA = 44
 
 // Um pulso a cada 7 s. O primeiro chega 2,2 s depois da montagem; antes disso a cena segue
@@ -29,20 +34,72 @@ const MIN_FPS = 24
 const QUADROS_VIGIADOS = 90
 const QUADROS_IGNORADOS = 10 // Compilação de shader não conta como lentidão.
 
+const faixa = (valor: number, de: number, ate: number) => Math.min(Math.max((valor - de) / (ate - de), 0), 1)
+
+/**
+ * Onde a lente fica e com que tamanho. O canvas cobre o hero inteiro; só a lente muda de lugar.
+ * Se o texto ocupa a coluna dela, a lente precisa caber acima: o limite é a posição real do
+ * texto, que muda com a fonte do sistema, não uma lista de tamanhos de tela.
+ */
+function layoutDaLente(largura: number, altura: number, texto: { topo: number; direita: number }) {
+  if (altura < 500 && largura > altura * 1.6) return { x: 0.91, escala: ESCALA_DEITADO }
+  const escala = 1 + (ESCALA_LARGA - 1) * faixa(largura, 768, 1024)
+  if (largura >= 1024) return { x: Math.min(0.86, 0.5 + BORDA_DO_CONTEUDO_PX / largura), escala }
+
+  const x = 0.7 + 0.16 * faixa(largura, 390, 1024)
+  const bordaDaLente = x * largura - (RAIO_LENTE / ALTURA_MUNDO) * escala * altura
+  if (texto.direita <= bordaDaLente) return { x, escala } // Texto ao lado, não embaixo.
+
+  const alturaOcupada = ((TOPO_ATE_LENTE + RAIO_LENTE) / ALTURA_MUNDO) * altura
+  const cabe = (texto.topo - FOLGA_TEXTO_PX) / alturaOcupada
+  if (cabe >= escala) return { x, escala }
+  if (cabe >= ESCALA_MINIMA) return { x, escala: cabe }
+  return { x: 1, escala: ESCALA_MINIMA } // Sem espaço acima do texto: metade da lente sai pela borda.
+}
+
 // Uma cena só na página: os uniforms ficam fora do componente e o laço de quadros os altera.
 const uniforms = {
   uTempo: { value: 12 },
   uDesde: { value: -ANTECEDENCIA_S },
   uAbertura: { value: 0 },
-  uLente: { value: LENTE },
+  uLente: { value: new Vector2() },
   uRaio: { value: RAIO_LENTE },
+  uEscala: { value: 1 },
 }
 
 type PropsConteudo = { aoPronta: () => void; aoLento: () => void }
 
 function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
   const lente = useRef<Mesh>(null)
-  const larguraMundo = useThree((s) => (ALTURA_MUNDO * s.size.width) / s.size.height)
+  const { width, height } = useThree((s) => s.size)
+  const definirDpr = useThree((s) => s.setDpr)
+  const [texto, setTexto] = useState({ topo: Number.POSITIVE_INFINITY, direita: 0 })
+  const larguraMundo = (ALTURA_MUNDO * width) / height
+  const { x, escala } = layoutDaLente(width, height, texto)
+  const lenteX = (x - 0.5) * larguraMundo
+  const lenteY = ALTURA_MUNDO / 2 - TOPO_ATE_LENTE * escala
+
+  useEffect(() => {
+    // Canvas do tamanho do hero: menos pixels no desktop. Refaz ao girar o celular.
+    definirDpr(Math.min(window.devicePixelRatio, width >= 1024 ? 1.25 : 1.5))
+  }, [definirDpr, width])
+
+  useEffect(() => {
+    let ativo = true
+    const medir = () => {
+      const hero = document.getElementById('hero')
+      const bloco = hero?.querySelector('h1')?.parentElement
+      if (!ativo || !hero || !bloco) return
+      const { top, right } = bloco.getBoundingClientRect()
+      setTexto({ topo: top - hero.getBoundingClientRect().top, direita: right })
+    }
+    const quadro = requestAnimationFrame(medir)
+    void document.fonts.ready.then(medir) // A fonte final muda a altura do texto.
+    return () => {
+      ativo = false
+      cancelAnimationFrame(quadro)
+    }
+  }, [width, height])
   const poeira = useMemo(() => {
     const geometria = new BufferGeometry()
     const posicoes = new Float32Array(TOTAL_POEIRA * 3)
@@ -50,7 +107,7 @@ function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
     for (let i = 0; i < TOTAL_POEIRA; i++) {
       // Sequência fixa, para o quadro inicial ser sempre o mesmo da imagem estática.
       const u = (i * 0.618034) % 1
-      posicoes.set([LENTE[0] + (u - 0.5) * 3.4, LENTE[1] + 0.6, 0.4], i * 3)
+      posicoes.set([(u - 0.5) * 3.4, 0.6, 0.4], i * 3)
       fases[i] = (i * 0.754877) % 1
     }
     geometria.setAttribute('position', new BufferAttribute(posicoes, 3))
@@ -65,6 +122,8 @@ function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
     const t = (uniforms.uTempo.value += delta)
     const desde = ((t - PRIMEIRA_CHEGADA + ANTECEDENCIA_S) % CICLO_S) - ANTECEDENCIA_S
     uniforms.uDesde.value = desde
+    uniforms.uLente.value.set(lenteX, lenteY)
+    uniforms.uEscala.value = escala
 
     // innerHeight em vez de medir o hero: nenhuma leitura de layout por quadro.
     const alvo = Math.min(window.scrollY / window.innerHeight, 1)
@@ -110,28 +169,30 @@ function Conteudo({ aoPronta, aoLento }: PropsConteudo) {
           depthWrite={false}
         />
       </mesh>
-      <mesh ref={lente} position={[LENTE[0], LENTE[1], 0]} scale={[RAIO_LENTE, RAIO_LENTE, 0.3]}>
-        <sphereGeometry args={[1, 48, 32]} />
-        <shaderMaterial
-          vertexShader={vertLente}
-          fragmentShader={fragLente}
-          uniforms={uniforms}
-          side={FrontSide}
-          blending={AdditiveBlending}
-          transparent
-          depthWrite={false}
-        />
-      </mesh>
-      <points geometry={poeira}>
-        <shaderMaterial
-          vertexShader={vertPoeira}
-          fragmentShader={fragPoeira}
-          uniforms={uniforms}
-          blending={AdditiveBlending}
-          transparent
-          depthWrite={false}
-        />
-      </points>
+      <group position={[lenteX, lenteY, 0]} scale={escala}>
+        <mesh ref={lente} scale={[RAIO_LENTE, RAIO_LENTE, 0.3]}>
+          <sphereGeometry args={[1, 48, 32]} />
+          <shaderMaterial
+            vertexShader={vertLente}
+            fragmentShader={fragLente}
+            uniforms={uniforms}
+            side={FrontSide}
+            blending={AdditiveBlending}
+            transparent
+            depthWrite={false}
+          />
+        </mesh>
+        <points geometry={poeira}>
+          <shaderMaterial
+            vertexShader={vertPoeira}
+            fragmentShader={fragPoeira}
+            uniforms={uniforms}
+            blending={AdditiveBlending}
+            transparent
+            depthWrite={false}
+          />
+        </points>
+      </group>
     </>
   )
 }

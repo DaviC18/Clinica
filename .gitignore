@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.impeccable
+coord
+.claude
+docs
+tests
+DESIGN.md
+PRODUCT.md
+PROMPT-INICIAL.md
+SPEC.md

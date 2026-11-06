@@ -24,6 +24,10 @@ export default {
         display: 'var(--fonte-display)',
         corpo: 'var(--fonte-corpo)',
       },
+      // O conteúdo pede o layout largo já em 1024 px: abaixo disso o hero empilha quatro linhas.
+      screens: {
+        xl: '64rem',
+      },
       fontSize: {
         legal: ['var(--texto-legal)', { lineHeight: 'var(--entrelinha-corpo)' }],
         corpo: ['var(--texto-corpo)', { lineHeight: 'var(--entrelinha-corpo)' }],
@@ -31,6 +35,7 @@ export default {
         'titulo-3': ['var(--texto-titulo-3)', { lineHeight: 'var(--entrelinha-titulo)' }],
         'titulo-2': ['var(--texto-titulo-2)', { lineHeight: 'var(--entrelinha-titulo)' }],
         hero: ['var(--texto-hero)', { lineHeight: 'var(--entrelinha-hero)' }],
+        nota: ['var(--texto-nota)', { lineHeight: '1' }],
       },
       spacing: {
         gutter: 'var(--espaco-gutter)',

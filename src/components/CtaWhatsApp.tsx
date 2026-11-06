@@ -8,9 +8,7 @@ type Props = {
   /** Em fundo claro o botão fluor precisa de borda (contraste 1,4 sem ela). */
   fundoClaro?: boolean
   className?: string
-  /** No header o ícone rouba a largura que o rótulo e o marcador precisam. */
-  semIcone?: boolean
-  /** Versão de uma linha para o header, com padding menor. */
+  /** Versão para o header, com padding menor. */
   compacto?: boolean
   /** Recebe o pulso da cena 3D. Só o CTA do hero. */
   recebeLuz?: boolean
@@ -20,7 +18,6 @@ export function CtaWhatsApp({
   rotulo = conteudo.hero.ctaPrimario,
   fundoClaro = false,
   className = '',
-  semIcone = false,
   compacto = false,
   recebeLuz = false,
 }: Props) {
@@ -29,7 +26,7 @@ export function CtaWhatsApp({
   return (
     <LinkWhatsapp
       destino={destino}
-      className={`inline-flex min-h-toque max-w-full flex-wrap items-center justify-center rounded-full bg-fluor text-corpo font-semibold text-tinta shadow-flutuante transition-transform duration-rapido ease-foco hover:-translate-y-0.5 ${
+      className={`inline-flex min-h-toque max-w-full items-center justify-center rounded-full bg-fluor text-corpo font-semibold text-tinta shadow-flutuante transition-transform duration-rapido ease-foco hover:-translate-y-0.5 ${
         compacto ? 'gap-x-1.5 px-3 py-1.5' : 'gap-x-2 gap-y-1 px-4 py-2.5 sm:px-6'
       } ${fundoClaro ? 'border border-tinta' : 'focus-visible:outline-fluor'} ${recebeLuz ? 'relative' : ''} ${className}`}
     >
@@ -40,8 +37,8 @@ export function CtaWhatsApp({
           onAnimationEnd={(evento) => evento.currentTarget.removeAttribute('data-ativa')}
         />
       )}
-      {!semIcone && <Icone aria-hidden="true" className="size-6 shrink-0" />}
-      <span className="whitespace-nowrap">{destino.rotulo}</span>
+      <Icone aria-hidden="true" className="size-6 shrink-0" />
+      <span className="min-w-0 text-center">{destino.rotulo}</span>
     </LinkWhatsapp>
   )
 }

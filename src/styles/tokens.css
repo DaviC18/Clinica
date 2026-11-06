@@ -38,9 +38,11 @@
   --texto-legal: 0.9375rem;
   --texto-corpo: 1.125rem;
   --texto-corpo-g: clamp(1.25rem, 1.18rem + 0.3vw, 1.375rem);
-  --texto-titulo-3: clamp(1.5rem, 1.35rem + 0.7vw, 2rem);
-  --texto-titulo-2: clamp(2rem, 1.6rem + 1.9vw, 3.25rem);
-  --texto-hero: clamp(2.5rem, 1.4rem + 4.9vw, 5.25rem);
+  /* O teto em vw segura títulos com o texto do sistema ampliado: palavra inteira ainda cabe na linha. */
+  --texto-titulo-3: min(clamp(1.5rem, 1.35rem + 0.7vw, 2rem), 9.5vw);
+  --texto-titulo-2: min(clamp(2rem, 1.6rem + 1.9vw, 3.25rem), 12vw);
+  --texto-hero: min(clamp(2.5rem, 1.4rem + 4.9vw, 5.25rem), 14vw);
+  --texto-nota: min(clamp(4.5rem, 3rem + 6vw, 6rem), 26vw);
   --entrelinha-corpo: 1.55;
   --entrelinha-titulo: 1.15;
   --entrelinha-hero: 1.05;

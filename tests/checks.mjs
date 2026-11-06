@@ -389,8 +389,9 @@ function checarConteudoSecoes(ctx) {
   check('conteudo', '#servicos: cinco grupos da SPEC', !grupos.length, grupos.length ? `faltam: ${grupos.join(', ')}` : '');
   const servicos = fatos.servicos.filter((x) => x.nome);
   const confirmados = servicos.filter((x) => x.status === 'confirmado');
-  const semNome = servicos.filter((x) => !serv.includes(normalizar(x.nome))).map((x) => x.nome);
-  check('conteudo', `#servicos: todos os serviços de fatos.json (${servicos.length})`, !semNome.length, semNome.join(' | '));
+  // Serviço a confirmar fica fora da página enquanto os marcadores estiverem ocultos (decisão do dono).
+  const semNome = confirmados.filter((x) => !serv.includes(normalizar(x.nome))).map((x) => x.nome);
+  check('conteudo', `#servicos: todos os serviços confirmados de fatos.json (${confirmados.length})`, !semNome.length, semNome.join(' | '));
   const semExplicacao = confirmados.filter((x) => x.explicacao && !serv.includes(normalizar(x.explicacao))).map((x) => x.nome);
   check('conteudo', 'regra 5: serviço com a explicação curta de fatos.json', !semExplicacao.length, semExplicacao.join(' | '));
 
@@ -895,7 +896,8 @@ function checarAvaliacoes(ctx) {
   }
   if (!lista.length) {
     check('avaliacoes', 'avaliacoes.lista vazia: nenhum depoimento publicado (blockquote, q, figcaption)', !blocos.length, `${blocos.length} encontrado(s)`);
-    check('avaliacoes', 'avaliacoes.lista vazia: placeholder [CONFIRMAR] visível', temConfirmar(texto(secao)));
+    // Marcadores ocultos por decisão do dono: sem falas, o título não pode prometê-las.
+    check('avaliacoes', 'avaliacoes.lista vazia: título não promete falas de pacientes', !/o que dizem/i.test(texto(secao)));
     return;
   }
   const citacoes = porTag(secao, 'blockquote');
@@ -940,12 +942,13 @@ function checarWhatsapp(ctx) {
     // Decisão 4 do orquestrador: sem confirmação, o CTA liga para o fixo e avisa que falta confirmar.
     check('whatsapp', 'sem número confirmado, nenhum link de WhatsApp ativo', !links.length, links.join(', '));
     for (const [id, no] of alvos) {
-      const cta = no ? buscar(no, (n) => n.tag === 'a' && String(n.attrs.href).startsWith('tel:') && temConfirmar(textoComAtributos(n))) : [];
+      // Marcadores ocultos por decisão do dono: a honestidade do CTA vem de dizer "Ligar" e mostrar o número.
+      const cta = no ? buscar(no, (n) => n.tag === 'a' && String(n.attrs.href).startsWith('tel:')) : [];
       const certo = cta.filter((n) => digitos(n.attrs.href).endsWith(digitos(fatos.telefone)));
-      check('whatsapp', `${id}: CTA tel: do fixo com [CONFIRMAR]`, certo.length > 0, cta.map((n) => n.attrs.href).join(', '));
+      check('whatsapp', `${id}: CTA tel: do fixo`, certo.length > 0, cta.map((n) => n.attrs.href).join(', '));
       const honesto = certo.filter((n) => /lig(ar|a|ue|ação)|telefone/i.test(n.attrs['aria-label'] ?? ''));
       check('whatsapp', `${id}: aria-label do CTA diz que liga`, honesto.length > 0, certo.map((n) => n.attrs['aria-label'] ?? 'sem aria-label').join(' | '));
-      check('whatsapp', `${id}: [CONFIRMAR] visível no CTA`, certo.some((n) => temConfirmar(texto(n))));
+      check('whatsapp', `${id}: número visível no CTA`, certo.some((n) => digitos(texto(n)).endsWith(digitos(fatos.telefone))));
     }
     const candidato = fatos.candidatoWhatsapp.slice(2);
     if (candidato) {

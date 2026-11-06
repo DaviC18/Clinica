@@ -100,6 +100,7 @@ export const fragFeixe = /* glsl */ `
 uniform float uTempo;
 uniform float uRaio;
 uniform float uAbertura; // 0 no topo da página, 1 quando o hero sai da tela.
+uniform float uEscala; // Feixe e lente crescem juntos em telas largas.
 uniform vec2 uLente;
 varying vec2 vMundo;
 ${pulsoGlsl}
@@ -118,8 +119,8 @@ float leque(float angulo, float abertura, float d) {
 }
 
 void main() {
-  float x = vMundo.x - uLente.x;
-  float acima = vMundo.y - uLente.y;
+  float x = (vMundo.x - uLente.x) / uEscala;
+  float acima = (vMundo.y - uLente.y) / uEscala;
   float saida = -acima - uRaio * 0.93; // Distância abaixo da borda inferior da lente.
   vec3 cor = vec3(0.0);
 
@@ -174,7 +175,6 @@ void main() {
 
 export const vertPoeira = /* glsl */ `
 uniform float uTempo;
-uniform vec2 uLente;
 attribute float aFase;
 varying float vBrilho;
 ${pulsoGlsl}
@@ -183,8 +183,8 @@ void main() {
   float t = uTempo * 0.05 + aFase;
   p.y -= mod(t, 1.0) * 7.5;
   p.x += sin(t * 9.0) * 0.1;
-  float d = max(uLente.y - p.y, 0.0);
-  float dentro = 1.0 - smoothstep(0.08, 0.26, abs(p.x - uLente.x) / (d + 0.6));
+  float d = max(-p.y, 0.0); // Posições relativas à lente: o grupo em Cena.tsx já a posiciona.
+  float dentro = 1.0 - smoothstep(0.08, 0.26, abs(p.x) / (d + 0.6));
   vBrilho = dentro * smoothstep(0.0, 0.14, fract(t)) * smoothstep(1.0, 0.7, fract(t));
   vBrilho *= 1.0 + acende(uDesde - TRAVESSIA, 0.9) * 1.3; // O pó aparece quando o pulso atravessa o leque.
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
